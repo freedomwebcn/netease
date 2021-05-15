@@ -1,0 +1,47 @@
+{
+  "name": "netease",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@better-scroll/core": "^2.3.1",
+    "core-js": "~3.12.1",
+    "cube-ui": "^1.12.46",
+    "swiper": "^5.2.1",
+    "vant": "~2.12.17",
+    "vue": "~2.6.12",
+    "vue-router": "~3.5.1",
+    "vuex": "~3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-router": "~4.5.13",
+    "@vue/cli-plugin-vuex": "~4.5.13",
+    "@vue/cli-service": "~4.5.13",
+    "babel-plugin-import": "~1.13.3",
+    "less": "~3.13.1",
+    "less-loader": "~5.0.0",
+    "lib-flexible": "~0.3.2",
+    "postcss-px2rem": "~0.3.0",
+    "stylus": "~0.54.8",
+    "stylus-loader": "~5.0.0",
+    "vue-template-compiler": "~2.6.12",
+    "webpack-transform-modules-plugin": "^0.4.4"
+  },
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/lib/${member}",
+      "kebabCase": true,
+      "style": {
+        "ignore": [
+          "create-api",
+          "better-scroll",
+          "locale"
+        ]
+      }
+    }
+  }
+}
