@@ -93,17 +93,54 @@
               <div
                 v-for="(count, index) in bannerSwiperPaginationCount"
                 :key="index"
-                :class="
-                  index === bannerSwiperPaginationIndex - 1
-                    ? 'swiper-pagination-customs-active'
-                    : 'swiper-pagination-customs'
-                "
+                :class="index === bannerSwiperPaginationIndex ? 'swiper-pagination-customs-active':'swiper-pagination-customs'"
                 class="banner-swiper-pagination"
               ></div>
             </div>
           </div>
 
-          <h3 style="height:50px">推荐歌单</h3>
+          <div class="product-module">
+            <ul class="swiper-wrapper product-list">
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-rili ico-product-item"></i>
+                <span>每日推荐</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-diantaizhibo ico-product-item"></i>
+                <span>私人FM</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-gedan ico-product-item"></i>
+                <span>歌单</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-paixingbang ico-product-item"></i>
+                <span>排行榜</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-zhibo1 ico-product-item"></i>
+                <span>直播</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-zhuanjiguangpan ico-product-item"></i>
+                <span>数字专辑</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-lotus ico-product-item"></i>
+                <span>冥想</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-changge ico-product-item"></i>
+                <span>歌房</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-ziyuan1 ico-product-item"></i>
+                <span>游戏</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- <h3 style="height:50px">推荐歌单</h3> -->
           <Playlist />
         </div>
 
@@ -113,6 +150,7 @@
         <div class="swiper-slide swiper-slide-community">Slide 3</div>
       </div>
     </div>
+    1111
   </div>
 </template>
 
@@ -134,6 +172,7 @@ export default {
   mounted() {
     this._initAppSwiper();
     this._initBannerSwiper();
+    this._initProductModule();
 
     // this.changeInputPlaceholder()
   },
@@ -169,29 +208,44 @@ export default {
           type: "custom",
           renderCustom: (swiper, current, total) => {
             // total : 分页器总数
-            // current: 当前激活的分页器下标值
+            // current: 当前激活的分页器下标 从 1 开始
             this.bannerSwiperPaginationCount = total;
-            this.bannerSwiperPaginationIndex = current;
+            this.bannerSwiperPaginationIndex = current - 1;
           }
         },
         spaceBetween: 20
       });
 
-      //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
       this.$nextTick(() => {
+        //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
         this.setSwiperPaginationContainerWidth();
+      });
+    },
+    // 初始化产品模块
+    _initProductModule() {
+      this.productModuleSwiper = new Swiper(".product-module", {
+        spaceBetween: 10,
+        slidesPerView: "auto",
+        resistanceRatio: 0.6,
+        freeMode: true
       });
     },
     // 设置分页器容器宽度
     setSwiperPaginationContainerWidth() {
-      // 获取分页器容器中的子元素 
-      let swiperPaginationChildrens = Array.from(this.$refs.swiperPaginationContainer.children);
+      // 获取分页器容器中的子元素
+      const swiperPaginationChildrens = Array.from(
+        this.$refs.swiperPaginationContainer.children
+      );
       const swiperPaginationChild = swiperPaginationChildrens[0];
       // 获取分页器容器中第一个子元素的宽度 + 右外边距
-      const getMargin = getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
+      const getMargin =
+        getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
       const getWidth = swiperPaginationChild.clientWidth;
-      const swiperPaginationChildrensSize = (getMargin + getWidth) * swiperPaginationChildrens.length -  getMargin + "px";
-      // 设置分页器容器的大小
+      const swiperPaginationChildrensSize =
+        (getMargin + getWidth) * swiperPaginationChildrens.length -
+        getMargin +
+        "px";
+      // 设置分页器容器的宽度
       this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
     },
 
@@ -288,6 +342,7 @@ export default {
             }
           }
         }
+        // 分页器容器
         .swiper-pagination-container {
           display: flex;
           justify-content: center;
@@ -295,7 +350,6 @@ export default {
           left: 50%;
           transform: translateX(-50%);
           // background-color: black;
-          // 分页器激活的样式
           .banner-swiper-pagination {
             width: 10px;
             height: 2px;
@@ -307,8 +361,48 @@ export default {
             &.swiper-pagination-customs {
               background-color: rgba(245, 244, 247, 0.3);
             }
+            // 分页器激活的样式
             &.swiper-pagination-customs-active {
               background-color: rgb(255, 255, 255);
+            }
+          }
+        }
+      }
+      .product-module {
+        width: 375px;
+        height: 65px;
+        overflow: hidden;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 12px;
+        .product-list {
+          display: flex;
+          align-items: center;
+          .product-item {
+            width: 45px;
+            height: 65px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            span {
+              white-space: nowrap;
+            }
+            .ico-product-item {
+              display: flex;
+              width: 100%;
+              height: 45px;
+              align-items: center;
+              justify-content: center;
+              flex: none;
+              margin-bottom: 5px;
+              border-radius: 50%;
+              font-size: 25px;
+              background-color: #fff1f1;
+              color: #fe3a3b;
+            }
+            &:last-child {
+              margin-right: 0 !important;
             }
           }
         }
