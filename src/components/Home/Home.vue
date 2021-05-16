@@ -177,13 +177,14 @@ export default {
         spaceBetween: 20
       });
 
-      //Vue异步更新界面
+      //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
       this.$nextTick(() => {
         this.setSwiperPaginationContainerWidth();
       });
     },
     // 设置分页器容器宽度
     setSwiperPaginationContainerWidth() {
+      // 获取分页器容器中的子元素 
       let swiperPaginationChildrens = Array.from(this.$refs.swiperPaginationContainer.children);
       const swiperPaginationChild = swiperPaginationChildrens[0];
       // 获取分页器容器中第一个子元素的宽度 + 右外边距
