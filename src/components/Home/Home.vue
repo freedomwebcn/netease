@@ -10,7 +10,13 @@
             <div class="m-search">
               <i class="icon-search iconfont icon-sousuo"></i>
               <span @click="jumpSearch" class="jump-search">
-                <input type="text" :placeholder="placeholder?placeholder:'你可能对这些音乐感兴趣'" disabled />
+                <input
+                  type="text"
+                  :placeholder="
+                    placeholder ? placeholder : '你可能对这些音乐感兴趣'
+                  "
+                  disabled
+                />
               </span>
             </div>
             <div class="r-rec iconfont icon-ziyuan"></div>
@@ -85,9 +91,13 @@
               ref="swiperPaginationContainer"
             >
               <div
-                v-for="(count,index) in bannerSwiperPaginationCount "
+                v-for="(count, index) in bannerSwiperPaginationCount"
                 :key="index"
-                :class="index === bannerSwiperPaginationIndex -1 ? 'swiper-pagination-customs-active':'swiper-pagination-customs'"
+                :class="
+                  index === bannerSwiperPaginationIndex - 1
+                    ? 'swiper-pagination-customs-active'
+                    : 'swiper-pagination-customs'
+                "
                 class="banner-swiper-pagination"
               ></div>
             </div>
@@ -131,6 +141,7 @@ export default {
   computed: {},
 
   methods: {
+    // 初始化整个app页面的swiper
     _initAppSwiper() {
       this.swiper = new Swiper(".app-swiper-container", {
         resistanceRatio: 0, //取消回弹
@@ -143,7 +154,7 @@ export default {
         }
       });
     },
-    // 初始化banner swiper
+    // 初始化发现页 banner-swiper
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
         resistanceRatio: 0, //取消回弹
@@ -157,32 +168,29 @@ export default {
           el: ".swiper-pagination",
           type: "custom",
           renderCustom: (swiper, current, total) => {
+            // total : 分页器总数
+            // current: 当前激活的分页器下标值
             this.bannerSwiperPaginationCount = total;
             this.bannerSwiperPaginationIndex = current;
           }
         },
         spaceBetween: 20
       });
-      // DOM更新完成后获取分页器子项的宽度  ---- Vue异步更新界面
+
+      //Vue异步更新界面
       this.$nextTick(() => {
         this.setSwiperPaginationContainerWidth();
       });
     },
-    // 获取分页器中第一项的宽度 + 右外边距
+    // 设置分页器容器宽度
     setSwiperPaginationContainerWidth() {
-      let swiperPaginationChildrens = Array.from(
-        this.$refs.swiperPaginationContainer.children
-      );
+      let swiperPaginationChildrens = Array.from(this.$refs.swiperPaginationContainer.children);
       const swiperPaginationChild = swiperPaginationChildrens[0];
-      // 获取分页容器子元素的右外边距
-      const getMargin =
-        getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
+      // 获取分页器容器中第一个子元素的宽度 + 右外边距
+      const getMargin = getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
       const getWidth = swiperPaginationChild.clientWidth;
-      const swiperPaginationChildrensSize =
-        (getMargin + getWidth) * swiperPaginationChildrens.length -
-        getMargin +
-        "px";
-      // 设置分页容器大小
+      const swiperPaginationChildrensSize = (getMargin + getWidth) * swiperPaginationChildrens.length -  getMargin + "px";
+      // 设置分页器容器的大小
       this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
     },
 
@@ -202,7 +210,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="less" scoped>
 .app-swiper-container {
