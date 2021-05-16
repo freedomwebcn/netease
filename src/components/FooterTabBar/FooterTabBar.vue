@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ["pageIndex"],
+  props: ["slideIndex"],
   data() {
     return {
       index: 0
@@ -27,8 +27,10 @@ export default {
   },
   computed: {},
   watch: {
-    pageIndex: function(i) {
-      this.index = i;
+    slideIndex: function(newValue) {
+      console.log(newValue);
+      
+      this.index = newValue;
     //   console.log(i, "-------------");
     }
   },
@@ -38,7 +40,7 @@ export default {
   methods: {
     changeState(index) {
       this.index = index;
-      this.$emit("newIndex", index);
+      this.$emit("tabChangeIndex", index);
 
     }
   }

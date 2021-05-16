@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="playlist">
+     
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="playlist-info">
@@ -72,7 +73,7 @@ export default {
         slidesPerView: 3.5,
         // touchMoveStopPropagation: true,
         freeMode: true,
-        freeModeMinimumVelocity : 0.1
+        freeModeMinimumVelocity: 0.1
       });
     }
   }

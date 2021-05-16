@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="app-swiper-container">
+    <div class="home-swiper-container">
       <div class="swiper-wrapper">
         <!--发现 -->
         <div class="swiper-slide swiper-slide-find">
@@ -118,7 +118,7 @@
                 <span>排行榜</span>
               </li>
               <li class="swiper-slide product-item">
-                <i class="iconfont icon-zhibo1 ico-product-item"></i>
+                <i class="iconfont icon-zhibo5 ico-product-item"></i>
                 <span>直播</span>
               </li>
               <li class="swiper-slide product-item">
@@ -139,9 +139,14 @@
               </li>
             </ul>
           </div>
-
-          <!-- <h3 style="height:50px">推荐歌单</h3> -->
-          <Playlist />
+          <div class="line"></div>
+          <!-- 推荐歌单 -->
+          <!-- <div class="recommend-playlist">
+            <h3 class="l-title" style="height:50px">推荐歌单</h3>
+            <span class="r-more">更多</span>
+            <Playlist></Playlist>
+          </div> -->
+          <!-- <Playlist></Playlist> -->
         </div>
 
         <!-- 我的 -->
@@ -150,7 +155,7 @@
         <div class="swiper-slide swiper-slide-community">Slide 3</div>
       </div>
     </div>
-    1111
+    <FooterTabBar :slideIndex="slideIndex" v-on:tabChangeIndex="tabChangeIndex"></FooterTabBar>
   </div>
 </template>
 
@@ -158,10 +163,12 @@
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
 import Playlist from "@/public_components/Playlist";
+import FooterTabBar from "@components/FooterTabBar/FooterTabBar";
 
 export default {
   data() {
     return {
+      slideIndex: 0,
       placeholder: "",
       // 分页器数量
       bannerSwiperPaginationCount: 0,
@@ -170,7 +177,7 @@ export default {
     };
   },
   mounted() {
-    this._initAppSwiper();
+    this._initHomeSwiper();
     this._initBannerSwiper();
     this._initProductModule();
 
@@ -180,20 +187,20 @@ export default {
   computed: {},
 
   methods: {
-    // 初始化整个app页面的swiper
-    _initAppSwiper() {
-      this.swiper = new Swiper(".app-swiper-container", {
+    // 初始化整个Home页面的swiper
+    _initHomeSwiper() {
+      this.homeSwiper = new Swiper(".home-swiper-container", {
         resistanceRatio: 0, //取消回弹
         on: {
           // slideChange 页面切换后执行
           slideChange: () => {
-            let slideIndex = this.swiper.activeIndex;
-            this.$emit("slideIndex", slideIndex);
+            this.slideIndex = this.homeSwiper.activeIndex;
           }
         }
       });
     },
-    // 初始化发现页 banner-swiper
+
+    // 初始化发现页 轮播
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
         resistanceRatio: 0, //取消回弹
@@ -224,7 +231,7 @@ export default {
     // 初始化产品模块
     _initProductModule() {
       this.productModuleSwiper = new Swiper(".product-module", {
-        spaceBetween: 10,
+        spaceBetween: 20,
         slidesPerView: "auto",
         resistanceRatio: 0.6,
         freeMode: true
@@ -248,7 +255,12 @@ export default {
       // 设置分页器容器的宽度
       this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
     },
-
+    // tab 切换后的index值
+    tabChangeIndex: function(tabIndex) {
+      // tabIndex : tab底栏切换后的index值
+      // 移动到对应的 slide 页
+      this.homeSwiper.slideTo(tabIndex, 0, false);
+    },
     jumpSearch() {
       console.log(111);
     },
@@ -261,19 +273,21 @@ export default {
     }
   },
   components: {
-    Playlist
+    Playlist,
+    FooterTabBar
   }
 };
 </script>
 
 <style lang="less" scoped>
-.app-swiper-container {
+.home-swiper-container {
   width: 100%;
   height: calc(100vh - 61px);
   .swiper-wrapper {
     .swiper-slide {
     }
     .swiper-slide-find {
+
       header {
         height: 50px;
         // background-color: aqua;
@@ -373,6 +387,7 @@ export default {
         height: 65px;
         overflow: hidden;
         margin-top: 10px;
+        margin-bottom: 10px;
         padding-left: 10px;
         padding-right: 12px;
         .product-list {
@@ -407,9 +422,14 @@ export default {
           }
         }
       }
+      .line{
+        height: 1px;
+        background-color: #F5F5F5;
+      }
     }
 
     .swiper-slide-personal {
+      padding: 0 10px 0 10px;
       background-color: rgb(11, 240, 99);
     }
     .swiper-slide-community {
