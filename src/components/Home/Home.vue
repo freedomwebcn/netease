@@ -145,7 +145,7 @@
             <h3 class="l-title" style="height:50px">推荐歌单</h3>
             <span class="r-more">更多</span>
             <Playlist></Playlist>
-          </div> -->
+          </div>-->
           <!-- <Playlist></Playlist> -->
         </div>
 
@@ -180,6 +180,10 @@ export default {
     this._initHomeSwiper();
     this._initBannerSwiper();
     this._initProductModule();
+    this.$nextTick(() => {
+      //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
+      this.setSwiperPaginationContainerWidth();
+    });
 
     // this.changeInputPlaceholder()
   },
@@ -200,7 +204,7 @@ export default {
       });
     },
 
-    // 初始化发现页 轮播
+    // 初始化轮播
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
         resistanceRatio: 0, //取消回弹
@@ -221,11 +225,6 @@ export default {
           }
         },
         spaceBetween: 20
-      });
-
-      this.$nextTick(() => {
-        //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
-        this.setSwiperPaginationContainerWidth();
       });
     },
     // 初始化产品模块
@@ -286,8 +285,8 @@ export default {
   .swiper-wrapper {
     .swiper-slide {
     }
+    // 发现页面 
     .swiper-slide-find {
-
       header {
         height: 50px;
         // background-color: aqua;
@@ -422,16 +421,17 @@ export default {
           }
         }
       }
-      .line{
+      .line {
         height: 1px;
-        background-color: #F5F5F5;
+        background-color: #f5f5f5;
       }
     }
-
+    // 我的
     .swiper-slide-personal {
       padding: 0 10px 0 10px;
       background-color: rgb(11, 240, 99);
     }
+    // 云村
     .swiper-slide-community {
       background-color: rgb(248, 13, 178);
     }
