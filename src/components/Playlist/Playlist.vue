@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="playlist">
-     
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="playlist-info">
@@ -63,6 +62,7 @@ export default {
   },
   mounted() {
     this._initSwiper();
+    // console.log(this.slidesPerView);
   },
   methods: {
     _initSwiper() {
@@ -84,16 +84,18 @@ export default {
 .playlist {
   height: 145px;
   padding-left: 10px;
-  padding-top: 14px;
+  padding-right: 12px;
   overflow: hidden;
+ 
   .swiper-wrapper {
+    margin-top: 5px;
     .swiper-slide {
       border-radius: 10px;
       height: 100px;
       &::before {
         content: "";
         display: block;
-        width: 89px;
+        width: 86px;
         height: 10px;
         background-color: #f2f2f2;
         position: absolute;
@@ -126,7 +128,6 @@ export default {
           border-radius: 10px;
         }
         p {
-          width: 100px;
           overflow: hidden;
           display: -webkit-box;
           position: relative;
