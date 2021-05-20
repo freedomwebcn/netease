@@ -29,9 +29,9 @@ export default {
   watch: {
     slideIndex: function(newValue) {
       console.log(newValue);
-      
+
       this.index = newValue;
-    //   console.log(i, "-------------");
+      //   console.log(i, "-------------");
     }
   },
   mounted() {
@@ -41,7 +41,6 @@ export default {
     changeState(index) {
       this.index = index;
       this.$emit("tabChangeIndex", index);
-
     }
   }
 };
@@ -51,11 +50,21 @@ export default {
 .tab_box {
   width: 375px;
   height: 61px;
-  border-top: 1px solid #ebedf0;
+  // border-top: 1px solid #ebedf0;
   background-color: #ffffff;
   position: absolute;
   z-index: 9999;
   bottom: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border-top: 1px solid #ebebeb;
+    /* background-color: red; */
+    width: 200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+  }
   .tab_item {
     width: 100%;
     height: 100%;

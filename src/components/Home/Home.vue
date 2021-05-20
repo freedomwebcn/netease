@@ -193,7 +193,7 @@
                         </div>
                         <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
                         <p class="describe">
-                          <i>独家</i>
+                          <i class>独家</i>
                           <span>云音乐飙升榜</span>
                         </p>
 
@@ -426,24 +426,34 @@ export default {
       // 分页器数量
       bannerSwiperPaginationCount: 0,
       // 当前分页器索引
-      bannerSwiperPaginationIndex: 0
+      bannerSwiperPaginationIndex: 0,
+
+      // 禁止触摸滑动
+      allowTouchMove: true
     };
   },
   mounted() {
     this._initHomeSwiper();
 
     this.$nextTick(() => {
-      // 设置scroll容器的高度
+      /*
+          如果提前没有在css设置bs容器的高度
+           那就要在初始化bs容器之前设置scroll容器的高度 
+            如果在初始化bs之后再去设置高度，虽然在控制台审查元素，看似设置上去了，尽管内容比容器高，其实是无法滚动的
+              原因就是bs不会自动检测容器的高度，它的高度是初始化bs对象的时候决定的（因为没有设置高度，scroll容器高度是由content子元素撑开的）
+              或者可以在之后调用提供的api: refresh() 来重新统计高度就可以滑动了
+      */
       this.setScrollHeigh();
       this.bs = new BScroll(".scroll-wrapper", {
         click: true,
         scrollY: true,
-        bounce: true,
-        bounceTime:300,
-        swipeBounceTime:100
+        bounce: false
       });
-
-
+      // this.bs.refresh();
+      this.bs.on("scrollStart", () => {
+        console.log(111);
+        this.test();
+      });
     });
 
     // this.changeInputPlaceholder()
@@ -456,6 +466,7 @@ export default {
     _initHomeSwiper() {
       this.homeSwiper = new Swiper(".home-swiper-container", {
         resistanceRatio: 0, //取消回弹
+        allowTouchMove: this.allowTouchMove,
         on: {
           // slideChange 页面切换后执行
           slideChange: () => {
@@ -463,11 +474,18 @@ export default {
           }
         }
       });
+      console.log(this);
+
+      console.log(this.allowTouchMove);
+
       this._initBannerSwiper();
       this._initProductModule();
       this._initRandomSongSwiper();
     },
-
+    test() {
+      // 禁止滑动
+      this.homeSwiper.allowTouchMove = false;
+    },
     // 初始化轮播
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
@@ -574,13 +592,13 @@ export default {
       }, 5000);
     },
 
+    //设置页面滚动包裹容器 .scroll-wrapper 的高度
     setScrollHeigh() {
       const app_h = document.querySelector("#app").offsetHeight;
       const header_h = document.querySelector("#header").offsetHeight;
       const scrollWrapper = document.querySelector("#scrollWrapper");
-      const footerTab_h= this.$refs.footerTab.$el.offsetHeight;
+      const footerTab_h = this.$refs.footerTab.$el.offsetHeight;
       scrollWrapper.style.height = app_h - header_h - footerTab_h + "px";
-      // console.log(scrollWrapper);
     }
   }
 };
@@ -766,6 +784,7 @@ export default {
 
       .random-song {
         width: 375px;
+        overflow: hidden;
         // height: 100px;
         padding-top: 20px;
         padding-left: 10px;
@@ -881,7 +900,6 @@ export default {
                 }
               }
               .describe {
-                // clear: both;
                 float: left;
                 height: 20px;
                 line-height: 20px;
@@ -895,6 +913,7 @@ export default {
                   line-height: 15px;
                   margin-right: 5px;
                   text-align: center;
+
                   border: 1px solid rgb(230, 55, 55);
                   color: #fe3a3b;
                   border-radius: 3px;
