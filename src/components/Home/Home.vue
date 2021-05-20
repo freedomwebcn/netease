@@ -147,7 +147,7 @@
                 <HotPlaylist title="推荐歌单"></HotPlaylist>
               </div>
               <!-- 随机推荐的歌 -->
-              <div class="random-song">
+              <div class="random-song" style="margin-bottom:10px">
                 <div class="title">
                   <h3 class="title-text">
                     <i class="iconfont icon-xiangyouxuanzhuan"></i>
@@ -390,8 +390,9 @@
                   </div>
                 </div>
               </div>
+
+              <HotPlaylist title="你的专属歌单"></HotPlaylist>
             </div>
-            <!-- <HotPlaylist title="推荐歌单"></HotPlaylist> -->
           </div>
         </div>
 
@@ -446,16 +447,12 @@ export default {
       this.setScrollHeigh();
       this.bs = new BScroll(".scroll-wrapper", {
         click: true,
-        scrollY: true,
+        // 设置横向为原生滚动
+        eventPassthrough: "horizontal",
+        // momentum:,
         bounce: false
       });
-      // this.bs.refresh();
-      this.bs.on("scrollStart", () => {
-        console.log(111);
-        this.test();
-      });
     });
-
     // this.changeInputPlaceholder()
   },
 
@@ -474,18 +471,12 @@ export default {
           }
         }
       });
-      console.log(this);
-
-      console.log(this.allowTouchMove);
 
       this._initBannerSwiper();
       this._initProductModule();
       this._initRandomSongSwiper();
     },
-    test() {
-      // 禁止滑动
-      this.homeSwiper.allowTouchMove = false;
-    },
+
     // 初始化轮播
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
@@ -835,7 +826,7 @@ export default {
         }
         .random-song-swiper {
           // background-color: #fe3a3b;
-          height: 200px;
+          // height: 200px;
 
           .song-container {
             .song-info-container {
@@ -915,7 +906,7 @@ export default {
                   text-align: center;
 
                   border: 1px solid rgb(230, 55, 55);
-                  color: #fe3a3b;
+                  color: hsl(360, 99%, 61%);
                   border-radius: 3px;
                 }
                 span {
@@ -933,6 +924,7 @@ export default {
     // 我的
     .swiper-slide-personal {
       padding: 0 10px 0 10px;
+      overflow: hidden;
       background-color: rgb(11, 240, 99);
     }
     // 云村
