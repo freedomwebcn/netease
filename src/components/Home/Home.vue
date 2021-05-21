@@ -5,18 +5,17 @@
         <!--发现 -->
         <!-- 顶部搜索 -->
 
-        <div style="height:50px">
-          <header id="header">
-            <div class="l-more iconfont icon-xianxinggengduo"></div>
-            <div class="m-search">
-              <i class="icon-search iconfont icon-sousuo"></i>
-              <span class="jump-search">
-                <input type="text" :placeholder=" placeholder  " disabled />
-              </span>
-            </div>
-            <div class="r-rec iconfont icon-ziyuan"></div>
-          </header>
-        </div>
+        <header id="header">
+          <div class="l-more iconfont icon-xianxinggengduo"></div>
+          <div class="m-search">
+            <i class="icon-search iconfont icon-sousuo"></i>
+            <span class="jump-search">
+              <input type="text" :placeholder=" placeholder  " disabled />
+            </span>
+          </div>
+          <div class="r-rec iconfont icon-ziyuan"></div>
+        </header>
+
         <div class="swiper-slide swiper-slide-find" ref="scroll">
           <div style="height:55px; background:#ffff"></div>
 
@@ -391,13 +390,24 @@
                 </div>
               </div>
 
+              <!-- 根据登录用户推荐 -->
               <HotPlaylist title="你的专属歌单"></HotPlaylist>
             </div>
           </div>
         </div>
-
         <!-- 我的 -->
-        <div class="swiper-slide swiper-slide-personal">Slide 2</div>
+        <div class="swiper-slide swiper-slide-personal">
+          Slide 2
+          <div class="father" style="height:100%;background:red">
+            <ul>
+              <li v-for="(item,index) in 20" :key="index"
+              
+              style="height:50px"
+              
+              >{{index}}</li>
+            </ul>
+          </div>
+        </div>
         <!-- 云村 -->
         <div class="swiper-slide swiper-slide-community">Slide 3</div>
       </div>
@@ -428,7 +438,6 @@ export default {
       bannerSwiperPaginationCount: 0,
       // 当前分页器索引
       bannerSwiperPaginationIndex: 0,
-
       // 禁止触摸滑动
       allowTouchMove: true
     };
@@ -450,9 +459,14 @@ export default {
         // 设置横向为原生滚动
         eventPassthrough: "horizontal",
         // momentum:,
-        bounce: false
+        bounce: false,
+        // stopPropagation: true
+      
       });
+
+     
     });
+
     // this.changeInputPlaceholder()
   },
 
@@ -464,6 +478,8 @@ export default {
       this.homeSwiper = new Swiper(".home-swiper-container", {
         resistanceRatio: 0, //取消回弹
         allowTouchMove: this.allowTouchMove,
+        touchMoveStopPropagation: true,
+
         on: {
           // slideChange 页面切换后执行
           slideChange: () => {
@@ -655,17 +671,14 @@ export default {
     // 发现页面
     .swiper-slide-find {
       // height: calc(100vh - 50px);
-
-      .content {
+      .scroll-wrapper {
+        // height: 556px;
         // overflow: hidden;
       }
-
       .bgc {
         background: #ffffff;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
-        // 头部
-
         // 轮播
         .banner-container {
           width: 100%;
