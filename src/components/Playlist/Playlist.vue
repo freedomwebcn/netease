@@ -4,7 +4,9 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="playlist-info">
-            <i class="iconfont icon-play">11</i>
+            <i class="iconfont icon-play">
+              111
+            </i>
             <img src="https://p2.music.126.net/zyiAnTJpsfHPSPVCVPXSEA==/109951165764984626.jpg" alt />
             <p>歌单名歌单名字歌单名字歌单名字歌单名字歌单名字字</p>
           </div>

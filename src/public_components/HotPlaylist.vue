@@ -3,7 +3,7 @@
     <div class="recommend-playlist">
       <div class="title-text">
         <h3 class="l-title">{{title}}</h3>
-        <span class="r-more ">
+        <span class="r-more">
           <span>更多</span>
           <i class="iconfont icon-dayuhao"></i>
         </span>
@@ -17,7 +17,7 @@ import Playlist from "@components/Playlist/Playlist";
 
 export default {
   props: {
-    title: String
+    title: String,
   },
   components: {
     Playlist
@@ -64,10 +64,10 @@ export default {
       border: 1px solid #e6e6e6;
       border-radius: 15px;
       font-size: 13px;
-      span{
+      span {
         margin-left: -3px;
       }
-      
+
       i {
         // margin-left: -4px;
         font-size: 12px;
