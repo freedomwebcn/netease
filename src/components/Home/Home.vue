@@ -248,7 +248,7 @@ export default {
       const idx = event ? event.target.dataset.index : 0;
       const newMusicTitleChildren = this.$refs.newMusicTitle.children;
       const newMusicContentChildren = this.$refs.newMusicContent.children;
-   
+
       newMusicContentChildren.forEach((item, index) => {
         newMusicTitleChildren[index].classList.remove("on");
         item.style = "display:none";
@@ -544,9 +544,11 @@ export default {
         .new-music-title {
           display: flex;
           margin-bottom: 10px;
-          font-size: 15px;
+          font-size: 17px;
+          color: rgb(156, 156, 156);
 
           .on {
+            color: black;
             font-weight: 700;
           }
 
