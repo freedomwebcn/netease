@@ -147,7 +147,7 @@
               <!-- 随机推荐的歌 -->
               <RandomPlaylist></RandomPlaylist>
               <!-- 根据登录用户推荐 -->
-              <!-- <HotPlaylist title="你的雷达歌单"></HotPlaylist> -->
+              <HotPlaylist title="你的雷达歌单"></HotPlaylist>
 
               <!-- 新音乐 -->
 
@@ -246,18 +246,13 @@ export default {
   methods: {
     newMusicTabChange(event) {
       const idx = event ? event.target.dataset.index : 0;
+      const newMusicTitleChildren = this.$refs.newMusicTitle.children;
       const newMusicContentChildren = this.$refs.newMusicContent.children;
-      const newMusicTitleChildren = Array.from(
-        this.$refs.newMusicTitle.children
-      );
-      // 添加新音乐标题类
-      newMusicTitleChildren.slice(0, -1).forEach((item, index) => {
-        item.classList.remove("on");
-        newMusicTitleChildren[idx].classList.add("on");
-      });
-      // 显示新音乐标题类对应的内容
-      newMusicContentChildren.forEach(item => {
+   
+      newMusicContentChildren.forEach((item, index) => {
+        newMusicTitleChildren[index].classList.remove("on");
         item.style = "display:none";
+        newMusicTitleChildren[idx].classList.add("on");
         newMusicContentChildren[idx].style = "display:block";
       });
     },
