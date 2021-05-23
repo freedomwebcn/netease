@@ -85,8 +85,8 @@ export default {
 <style lang="less" scoped>
 .playlist {
   height: 145px;
-  padding-left: 10px;
-  padding-right: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
   overflow: hidden;
  
   .swiper-wrapper {

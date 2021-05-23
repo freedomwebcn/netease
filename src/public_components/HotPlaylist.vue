@@ -34,7 +34,7 @@ export default {
   .title-text {
     display: flex;
     position: relative;
-    padding: 15px 13px 10px 11px;
+    padding: 15px 15px 10px 15px;
     .l-title {
       flex: 1;
       font-size: 17px;

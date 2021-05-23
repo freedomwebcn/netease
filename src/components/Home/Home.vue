@@ -150,7 +150,6 @@
               <HotPlaylist title="你的雷达歌单"></HotPlaylist>
 
               <!-- 新音乐 -->
-
               <div class="new-music-container">
                 <div class="new-music-title" ref="newMusicTitle">
                   <div class="new-song" data-index="0" @click="newMusicTabChange($event)">新歌</div>
@@ -170,6 +169,68 @@
                   </div>
                 </div>
               </div>
+
+              <!-- 排行榜 -->
+              <div class="ranking">
+                <div class="ranking-title">
+                  <h3 class="title">排行榜</h3>
+                  <span class="more">更多</span>
+                </div>
+
+                <div class="ranking-type-container">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide ranking-type">
+                      <!-- 原创音乐 -->
+                      <div class="original-music">
+                        <h3 class="original-music-title">原创榜</h3>
+                      </div>
+                      <div class="original-music-info-container clearfix">
+                        <img
+                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                          alt
+                        />
+                        <span class="original-music-sort">1</span>
+                        <div class="original-music-info">
+                          <span class="original-music-name">黄金时代</span>
+                          <i style="margin: 0 3px 0 3px">-</i>
+                          <span class="original-music-singer">声音碎片乐队</span>
+                        </div>
+                        <i class="icofont"></i>
+                      </div>
+                      <div class="original-music-info-container clearfix">
+                        <img
+                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                          alt
+                        />
+                        <span class="original-music-sort">2</span>
+                        <div class="original-music-info">
+                          <span class="original-music-name">黄金时代</span>
+                          <i style="margin: 0 3px 0 3px">-</i>
+                          <span class="original-music-singer">声音碎片乐队</span>
+                        </div>
+                        <i class="icofont"></i>
+                      </div>
+                      <div class="original-music-info-container clearfix">
+                        <img
+                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                          alt
+                        />
+                        <span class="original-music-sort">3</span>
+                        <div class="original-music-info">
+                          <span class="original-music-name">黄金时代</span>
+                          <i style="margin: 0 3px 0 3px"  class="fz-style">-</i>
+                          <span class="original-music-singer fz-style" >声音碎片乐队</span>
+                        </div>
+                        <i class="ico"></i>
+                      </div>
+                    </div>
+                    <div class="swiper-slide ranking-type"></div>
+                    <div class="swiper-slide ranking-type"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="height:300px"></div>
             </div>
           </div>
         </div>
@@ -189,9 +250,7 @@ import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
 import HotPlaylist from "@/public_components/HotPlaylist";
 import RandomPlaylist from "@/public_components/RandomPlaylist";
-
 import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
-
 import FooterTabBar from "@components/FooterTabBar/FooterTabBar";
 import BScroll from "@better-scroll/core";
 
@@ -274,6 +333,7 @@ export default {
       this._initBannerSwiper();
       this._initProductModule();
       this.newMusicTabChange();
+      this._initRanking();
     },
 
     // 初始化轮播
@@ -331,6 +391,18 @@ export default {
         freeMode: true
       });
     },
+    // 初始化排行榜
+    _initRanking() {
+      this.rankingSwiper = new Swiper(".ranking-type-container", {
+        spaceBetween: 11,
+        slidesPerView: "auto",
+        resistanceRatio: 0.6,
+        // slidesOffsetBefore : 6,
+        slidesOffsetAfter: 20
+
+        // freeMode: true
+      });
+    },
 
     // tab 切换后的index值
     tabChangeIndex: function(tabIndex) {
@@ -360,21 +432,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@bgColor: #ffffff;
 .home-swiper-container {
   width: 100%;
   height: calc(100vh - 61px);
   .swiper-wrapper {
     header {
       height: 50px;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
       display: flex;
       align-items: center;
       text-align: center;
       position: fixed;
       z-index: 99999;
       width: 100%;
-      background: #ffffff;
+      background: @bgColor;
 
       .l-more {
         width: 20px;
@@ -424,7 +497,7 @@ export default {
         // overflow: hidden;
       }
       .bgc {
-        background: #ffffff;
+        background: @bgColor;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
         // 轮播
@@ -502,7 +575,7 @@ export default {
           width: 375px;
           overflow: hidden;
           margin-bottom: 5px;
-          padding: 12px 12px 0 10px;
+          padding: 12px 15px 0 15px;
 
           .product-list {
             .product-item {
@@ -536,22 +609,20 @@ export default {
 
       // 新音乐
       .new-music-container {
-        padding: 10px 10px 0 10px;
+        padding: 15px 15px 0 15px;
         margin-top: 10px;
-        background-color: #ffffff;
-        // font-size: 15px;
-        // height: 200px;
+        margin-bottom: 10px;
+        background-color: @bgColor;
+        border-radius: 13px;
         .new-music-title {
           display: flex;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
           font-size: 17px;
           color: rgb(156, 156, 156);
-
           .on {
             color: black;
             font-weight: 700;
           }
-
           .new-cd {
             margin: 0 10px 0 10px;
           }
@@ -562,9 +633,77 @@ export default {
           }
         }
       }
-      // .new-music-content {
-      //   height: 200px;
-      // }
+      //  排行榜
+      .ranking {
+        .new-music-container ();
+        margin-top: 0;
+        height: 280px;
+        .ranking-title {
+          display: flex;
+          font-size: 17px;
+          // padding-left: 3px;
+          background-color: #ffffff;
+          margin-bottom: 15px;
+          .title {
+            flex: 1;
+          }
+        }
+        .ranking-type-container {
+          .ranking-type {
+            width: 328px;
+            // height: 220px;
+            float: left;
+            //  box-shadow:-1px -3px 0px #F8F8F8;
+            box-shadow: 0px 0px 10px rgb(238, 238, 238);
+            border-radius: 8px;
+            padding-top: 15px;
+            padding-left: 10px;
+            padding-right: 8px;
+
+            .original-music {
+              font-size: 18px;
+              text-align: center;
+              .original-music-title {
+                font-weight: 700;
+              }
+            }
+            .original-music-info-container {
+              height: 50px;
+              line-height: 50px;
+              margin-bottom: 10px;
+
+              img {
+                width: 50px;
+                height: 100%;
+                float: left;
+                border-radius: 8px;
+              }
+              .original-music-sort {
+                float: left;
+                font-size: 13px;
+                font-weight: 700;
+                margin: 0 10px 0 10px;
+              }
+              .original-music-info {
+                float: left;
+                font-size: 13px;
+                .fz-style{
+                  font-size: 12px;
+                  color: #A7A7A7;
+                }
+              }
+              .ico {
+                width: 30px;
+                height: 100%;
+                float: right;
+                background: url('./img/ddd.png') no-repeat center center;
+                background-size: 26px 7px;
+                // background-color: #fe3a3b;
+              }
+            }
+          }
+        }
+      }
     }
     // 我的
     .swiper-slide-personal {

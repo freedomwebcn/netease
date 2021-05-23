@@ -5,7 +5,10 @@
         <div class="swiper-slide song-container slide1 ref='songContainer'">
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
+
+            <div class="cd-mask"></div>
+
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -53,7 +56,9 @@
         <div class="swiper-slide song-container slide2">
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
+            <div class="cd-mask"></div>
+
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -101,7 +106,7 @@
         <div class="swiper-slide song-container slide3">
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -116,7 +121,7 @@
           </div>
           <div class="song-info-container mt clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -131,7 +136,7 @@
           </div>
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -148,7 +153,7 @@
         <div class="swiper-slide song-container slide4">
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -163,7 +168,7 @@
           </div>
           <div class="song-info-container mt clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -178,7 +183,7 @@
           </div>
           <div class="song-info-container clearfix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="mask iconfont icon-bofang2"></div>
+            <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
@@ -278,7 +283,7 @@ export default {
         border-radius: 8px;
         margin-right: 5px;
       }
-      .mask {
+      .play-mask {
         position: absolute;
         width: 50px;
         height: 50px;
@@ -288,6 +293,17 @@ export default {
         border-radius: 8px;
         color: rgba(255, 255, 255, 0.705);
         font-size: 25px;
+      }
+      .cd-mask {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: -5px;
+        z-index: -9999;
+        clip: rect(0, 25px, 25px, 0);
+        border-radius: 50%;
+        transform: rotate(45deg);
+        background-color: black;
       }
 
       .song-info {

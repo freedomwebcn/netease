@@ -33,8 +33,8 @@ export default {
   overflow: hidden;
   // height: 100px;
   padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-top: 9px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
