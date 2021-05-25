@@ -1,342 +1,378 @@
 <template>
-  <div>
-    <div class="home-swiper-container">
-      <div class="swiper-wrapper">
-        <!--发现 -->
-        <!-- 顶部搜索 -->
+  <div class="father">
+    <div class="swiper-wrapper child">
+      <!-- 顶部搜索 -->
+      <header id="header">
+        <div class="l-more iconfont icon-xianxinggengduo"></div>
+        <div class="m-search">
+          <i class="icon-search iconfont icon-sousuo"></i>
+          <span class="jump-search">
+            <input type="text" :placeholder=" placeholder  " disabled />
+          </span>
+        </div>
+        <div class="r-rec iconfont icon-ziyuan"></div>
+      </header>
 
-        <header id="header">
-          <div class="l-more iconfont icon-xianxinggengduo"></div>
-          <div class="m-search">
-            <i class="icon-search iconfont icon-sousuo"></i>
-            <span class="jump-search">
-              <input type="text" :placeholder=" placeholder  " disabled />
-            </span>
+      <!-- 第一页 -->
+      <div class="swiper-slide slide1 scw">
+        <div class="clear-fixed"></div>
+        <!-- 轮播 -->
+        <div class="bgc">
+          <div class="banner-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/7rYfKJKoIT6vi_kbzeR2TQ==/109951165974295616.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/j618RbxQu03dOMwKctaiyg==/109951165975300062.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/-Qv32LewRtWvE85uNlDMLg==/109951165975283734.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/DhGemkvG6PWdKSgnmkSh7Q==/109951165975523779.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/HiUfSuVL6LxpRfnIUkj1TQ==/109951165974974852.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/gq26apb35rkNAALJsW_UhA==/109951165973754863.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/ll8kxyHkKDflkY0BmE59Bw==/109951165975541600.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/ZRIcQHSfJ5qJiJnJU5bBlw==/109951165975196925.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/1o7jBIqdCIq2mlt5JOYCaw==/109951165974556044.jpg"
+                  alt
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="http://p1.music.126.net/1Nvy2FYCiF1aEfgZR1cULw==/109951165974567008.jpg"
+                  alt
+                />
+              </div>
+            </div>
+            <!-- 分页器 -->
+            <div
+              class="swiper-pagination swiper-pagination-container"
+              ref="swiperPaginationContainer"
+            >
+              <div
+                v-for="(count, index) in bannerSwiperPaginationCount"
+                :key="index"
+                :class="index === bannerSwiperPaginationIndex ? 'swiper-pagination-customs-active':'swiper-pagination-customs'"
+                class="banner-swiper-pagination"
+              ></div>
+            </div>
           </div>
-          <div class="r-rec iconfont icon-ziyuan"></div>
-        </header>
 
-        <div class="swiper-slide swiper-slide-find" ref="scroll">
-          <div style="height:55px; background:#ffff"></div>
-          <div class="scroll-wrapper" id="scrollWrapper">
-            <div class="content">
-              <div class="bgc">
-                <!-- 轮播 -->
-                <div class="banner-container">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/7rYfKJKoIT6vi_kbzeR2TQ==/109951165974295616.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/j618RbxQu03dOMwKctaiyg==/109951165975300062.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/-Qv32LewRtWvE85uNlDMLg==/109951165975283734.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/DhGemkvG6PWdKSgnmkSh7Q==/109951165975523779.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/HiUfSuVL6LxpRfnIUkj1TQ==/109951165974974852.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/gq26apb35rkNAALJsW_UhA==/109951165973754863.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/ll8kxyHkKDflkY0BmE59Bw==/109951165975541600.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/ZRIcQHSfJ5qJiJnJU5bBlw==/109951165975196925.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/1o7jBIqdCIq2mlt5JOYCaw==/109951165974556044.jpg"
-                        alt
-                      />
-                    </div>
-                    <div class="swiper-slide">
-                      <img
-                        src="http://p1.music.126.net/1Nvy2FYCiF1aEfgZR1cULw==/109951165974567008.jpg"
-                        alt
-                      />
-                    </div>
-                  </div>
-                  <!-- 分页器 -->
-                  <div
-                    class="swiper-pagination swiper-pagination-container"
-                    ref="swiperPaginationContainer"
-                  >
-                    <div
-                      v-for="(count, index) in bannerSwiperPaginationCount"
-                      :key="index"
-                      :class="index === bannerSwiperPaginationIndex ? 'swiper-pagination-customs-active':'swiper-pagination-customs'"
-                      class="banner-swiper-pagination"
-                    ></div>
-                  </div>
-                </div>
+          <!-- 产品 -->
+          <div class="product-module">
+            <ul class="swiper-wrapper product-list">
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-rili ico-product-item"></i>
+                <span>每日推荐</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-diantaizhibo ico-product-item"></i>
+                <span>私人FM</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-gedan ico-product-item"></i>
+                <span>歌单</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-paixingbang ico-product-item"></i>
+                <span>排行榜</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-zhibo5 ico-product-item"></i>
+                <span>直播</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-zhuanjiguangpan ico-product-item"></i>
+                <span>数字专辑</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-lotus ico-product-item"></i>
+                <span>冥想</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-changge ico-product-item"></i>
+                <span>歌房</span>
+              </li>
+              <li class="swiper-slide product-item">
+                <i class="iconfont icon-ziyuan1 ico-product-item"></i>
+                <span>游戏</span>
+              </li>
+            </ul>
+          </div>
+          <!-- <div></div> -->
+          <div class="line border-bottom-1px"></div>
 
-                <div class="product-module">
-                  <ul class="swiper-wrapper product-list">
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-rili ico-product-item"></i>
-                      <span>每日推荐</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-diantaizhibo ico-product-item"></i>
-                      <span>私人FM</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-gedan ico-product-item"></i>
-                      <span>歌单</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-paixingbang ico-product-item"></i>
-                      <span>排行榜</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-zhibo5 ico-product-item"></i>
-                      <span>直播</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-zhuanjiguangpan ico-product-item"></i>
-                      <span>数字专辑</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-lotus ico-product-item"></i>
-                      <span>冥想</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-changge ico-product-item"></i>
-                      <span>歌房</span>
-                    </li>
-                    <li class="swiper-slide product-item">
-                      <i class="iconfont icon-ziyuan1 ico-product-item"></i>
-                      <span>游戏</span>
-                    </li>
-                  </ul>
-                </div>
-                <!-- <div></div> -->
-                <div class="line border-bottom-1px"></div>
-                <!-- 推荐歌单  -->
-                <HotPlaylist title="推荐歌单"></HotPlaylist>
-              </div>
-              <!-- 随机推荐的歌 -->
-              <RandomPlaylist></RandomPlaylist>
-              <!-- 根据登录用户推荐 -->
-              <HotPlaylist title="你的雷达歌单"></HotPlaylist>
+          <!-- 推荐歌单  -->
+          <HotPlaylist title="推荐歌单"></HotPlaylist>
+        </div>
 
-              <!-- 新音乐 -->
-              <div class="new-music-container">
-                <div class="new-music-title" ref="newMusicTitle">
-                  <div class="new-song" data-index="0" @click="newMusicTabChange($event)">新歌</div>
-                  <div class="new-cd" data-index="1" @click="newMusicTabChange($event)">新碟</div>
-                  <div class="new-album" data-index="2" @click="newMusicTabChange($event)">数字专辑</div>
-                  <!-- <div class="more">更多</div>
-                  -->
+        <!-- 随机推荐的歌 -->
+        <RandomPlaylist></RandomPlaylist>
+        <!-- 根据登录用户推荐 -->
+        <HotPlaylist title="你的雷达歌单"></HotPlaylist>
 
-                  <More></More>
-                </div>
-                <div class="new-music-content" ref="newMusicContent">
-                  <div class="new-song-list">
-                    <RandomplaylistSwiper songName="第一页"></RandomplaylistSwiper>
-                  </div>
-                  <div class="new-cd-list">
-                    <RandomplaylistSwiper songName="第二页"></RandomplaylistSwiper>
-                  </div>
-                  <div class="new-album-list">
-                    <RandomplaylistSwiper songName="第三页"></RandomplaylistSwiper>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 排行榜 -->
-
-              <div class="ranking">
-                <div class="ranking-title">
-                  <h3 class="title">排行榜</h3>
-
-                  <More></More>
-                </div>
-
-                <div class="ranking-type-container">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide ranking-type">
-                      <!-- 原创音乐 -->
-                      <div class="original-music">
-                        <h3 class="original-music-title">原创榜</h3>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">2</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">3</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px" class="fz-style">-</i>
-                          <span class="original-music-singer fz-style">声音碎片乐队</span>
-                        </div>
-                        <i class="ico new"></i>
-                      </div>
-                    </div>
-                    <div class="swiper-slide ranking-type">
-                      <!-- 原创音乐 -->
-                      <div class="original-music">
-                        <h3 class="original-music-title">日本榜</h3>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                    </div>
-                    <div class="swiper-slide ranking-type">
-                      <!-- 原创音乐 -->
-                      <div class="original-music">
-                        <h3 class="original-music-title">欧美榜</h3>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                      <div class="original-music-info-container clearfix">
-                        <img
-                          src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                          alt
-                        />
-                        <span class="original-music-sort">1</span>
-                        <div class="original-music-info">
-                          <span class="original-music-name">黄金时代</span>
-                          <i style="margin: 0 3px 0 3px">-</i>
-                          <span class="original-music-singer">声音碎片乐队</span>
-                        </div>
-                        <i class="icofont"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- <div style="height:200px;width:50px;"> -->
-                <More></More>
-              <!-- </div> -->
+        <!-- 新音乐 -->
+        <div class="new-music-container">
+          <div class="new-music-title" ref="newMusicTitle">
+            <div class="new-song" data-index="0" @click="newMusicTabChange($event)">新歌</div>
+            <div class="new-cd" data-index="1" @click="newMusicTabChange($event)">新碟</div>
+            <div class="new-album" data-index="2" @click="newMusicTabChange($event)">数字专辑</div>
+            <div class="pos-style"></div>
+            <More moreText="更多" class="new-music-more">
+              <template #right>
+                <i class="iconfont icon-dayuhao"></i>
+              </template>
+            </More>
+          </div>
+          <div class="new-music-content" ref="newMusicContent">
+            <div class="new-song-list">
+              <RandomplaylistSwiper songName="第一页"></RandomplaylistSwiper>
+            </div>
+            <div class="new-cd-list">
+              <RandomplaylistSwiper songName="第二页"></RandomplaylistSwiper>
+            </div>
+            <div class="new-album-list">
+              <RandomplaylistSwiper songName="第三页"></RandomplaylistSwiper>
             </div>
           </div>
         </div>
-        <!-- 我的 -->
-        <div class="swiper-slide swiper-slide-personal">Slide 2</div>
-        <!-- 云村 -->
-        <div class="swiper-slide swiper-slide-community">Slide 3</div>
+
+        <!-- 排行榜 -->
+        <div class="ranking">
+          <div class="ranking-title">
+            <h3 class="title">排行榜</h3>
+            <More moreText="更多">
+              <template #right>
+                <i class="iconfont icon-dayuhao"></i>
+              </template>
+            </More>
+          </div>
+          <div class="ranking-type-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide ranking-type">
+                <!-- 原创音乐 -->
+                <div class="original-music">
+                  <h3 class="original-music-title">原创榜</h3>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">2</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">3</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px" class="fz-style">-</i>
+                    <span class="original-music-singer fz-style">声音碎片乐队</span>
+                  </div>
+                  <i class="ico new"></i>
+                </div>
+              </div>
+              <div class="swiper-slide ranking-type">
+                <div class="original-music">
+                  <h3 class="original-music-title">日本榜</h3>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+              </div>
+              <div class="swiper-slide ranking-type">
+                <!-- 原创音乐 -->
+                <div class="original-music">
+                  <h3 class="original-music-title">欧美榜</h3>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+                <div class="original-music-info-container clearfix">
+                  <img
+                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
+                    alt
+                  />
+                  <span class="original-music-sort">1</span>
+                  <div class="original-music-info">
+                    <span class="original-music-name">黄金时代</span>
+                    <i style="margin: 0 3px 0 3px">-</i>
+                    <span class="original-music-singer">声音碎片乐队</span>
+                  </div>
+                  <i class="icofont"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+          <li>11</li>
+          <li>12</li>
+          <li>13</li>
+          <li>14</li>
+          <li>15</li>
+          <li>16</li>
+          <li>17</li>
+          <li>18</li>
+          <li>19</li>
+          <li>20</li>
+        </ul>-->
+      </div>
+
+      <div class="swiper-slide slide2">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+          <li>11</li>
+          <li>12</li>
+          <li>13</li>
+          <li>14</li>
+          <li>15</li>
+          <li>16</li>
+          <li>17</li>
+          <li>18</li>
+          <li>19</li>
+          <li>20</li>
+        </ul>
       </div>
     </div>
-    <!-- Tab栏 -->
-    <FooterTabBar :slideIndex="slideIndex" v-on:tabChangeIndex="tabChangeIndex" ref="footerTab"></FooterTabBar>
   </div>
 </template>
 
@@ -347,13 +383,9 @@ import HotPlaylist from "@/public_components/HotPlaylist";
 import RandomPlaylist from "@/public_components/RandomPlaylist";
 import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
 import More from "@/public_components/More";
-
-import FooterTabBar from "@components/FooterTabBar/FooterTabBar";
-import BScroll from "@better-scroll/core";
-
 export default {
   components: {
-    FooterTabBar,
+    // FooterTabBar,
     HotPlaylist,
     RandomPlaylist,
     RandomplaylistSwiper,
@@ -374,34 +406,8 @@ export default {
     };
   },
   mounted() {
-    this._initHomeSwiper();
-
-    this.$nextTick(() => {
-      /*
-          如果提前没有在css设置bs容器的高度
-           那就要在初始化bs容器之前设置scroll容器的高度 
-            如果在初始化bs之后再去设置高度，虽然在控制台审查元素，看似设置上去了，尽管内容比容器高，其实是无法滚动的
-              原因就是bs不会自动检测容器的高度，它的高度是初始化bs对象的时候决定的（因为没有设置高度，scroll容器高度是由content子元素撑开的）
-              或者可以在之后调用提供的api: refresh() 来重新统计高度就可以滑动了
-      */
-      this.setScrollHeigh();
-
-      this.bs = new BScroll(".scroll-wrapper", {
-        click: true,
-        eventPassthrough: "horizontal",
-        bounce: false,
-        // stopPropagation: true,
-        disableMouse: false,
-        disableTouch: false
-      });
-      console.log(this);
-    });
-
-    // this.changeInputPlaceholder()
+    this.init();
   },
-
-  computed: {},
-
   methods: {
     newMusicTabChange(event) {
       const idx = event ? event.target.dataset.index : 0;
@@ -415,20 +421,9 @@ export default {
         newMusicContentChildren[idx].style = "display:block";
       });
     },
-
-    // 初始化三个slide页面的swiper
-    _initHomeSwiper() {
-      this.homeSwiper = new Swiper(".home-swiper-container", {
-        resistanceRatio: 0, //取消回弹
-        allowTouchMove: this.allowTouchMove,
-        touchMoveStopPropagation: true,
-
-        on: {
-          // slideChange 页面切换后执行
-          slideChange: () => {
-            this.slideIndex = this.homeSwiper.activeIndex;
-          }
-        }
+    init() {
+      const fatherSwiper = new Swiper(".father", {
+        resistanceRatio: 0 //取消回弹
       });
       this._initBannerSwiper();
       this._initProductModule();
@@ -441,6 +436,7 @@ export default {
       this.bannerSwiper = new Swiper(".banner-container", {
         resistanceRatio: 0, //取消回弹
         touchMoveStopPropagation: true,
+        nested: true,
         loop: true,
         autoplay: {
           delay: 5000,
@@ -463,7 +459,6 @@ export default {
         this.setSwiperPaginationContainerWidth();
       });
     },
-
     // 设置分页器容器宽度
     setSwiperPaginationContainerWidth() {
       // 获取分页器容器中的子元素
@@ -482,7 +477,6 @@ export default {
       // 设置分页器容器的宽度
       this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
     },
-
     // 初始化产品模块
     _initProductModule() {
       this.productModuleSwiper = new Swiper(".product-module", {
@@ -505,41 +499,17 @@ export default {
         resistanceRatio: 0.6,
         slidesOffsetAfter: 20
       });
-    },
-
-    // tab 切换后的index值
-    tabChangeIndex: function(tabIndex) {
-      // tabIndex : tab底栏切换后的index值
-      // 移动到对应的 slide 页
-      this.homeSwiper.slideTo(tabIndex, 0, false);
-    },
-
-    changeInputPlaceholder() {
-      let songNameArr = ["许巍", "老鹰乐队", "青花瓷", "故乡", "情人"];
-
-      setInterval(() => {
-        this.placeholder = songNameArr[Math.floor(Math.random() * 5)];
-      }, 5000);
-    },
-
-    //设置页面滚动包裹容器 .scroll-wrapper 的高度
-    setScrollHeigh() {
-      const app_h = document.querySelector("#app").offsetHeight;
-      const header_h = document.querySelector("#header").offsetHeight;
-      const scrollWrapper = document.querySelector("#scrollWrapper");
-      const footerTab_h = this.$refs.footerTab.$el.offsetHeight;
-      scrollWrapper.style.height = app_h - header_h - footerTab_h + "px";
     }
   }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less" scope>
 @bgColor: #ffffff;
-.home-swiper-container {
-  width: 100%;
-  height: calc(100vh - 61px);
-  .swiper-wrapper {
+.father {
+  height: 100%;
+  overflow-x: hidden;
+  .child {
     header {
       height: 50px;
       padding-left: 15px;
@@ -586,18 +556,30 @@ export default {
       }
       .r-rec {
         .l-more();
-        // background-color: pink;
       }
     }
+    .slide1 {
+      height: 100%;
+      width: 100%;
+      //   background-color: rgb(247, 4, 97);
+      overflow-y: scroll;
+      overflow-x: hidden;
+      //   chrome去除滚动条样式
 
-    .swiper-slide {
-    }
-    // 发现页面
-    .swiper-slide-find {
-      // height: calc(100vh - 50px);
-      .scroll-wrapper {
-        // height: 556px;
-        // overflow: hidden;
+      & ::-webkit-scrollbar {
+        display: none;
+      }
+      //   兼容火狐
+      &.scw {
+        scrollbar-width: none;
+      }
+      //   兼容IE10+
+      &.msscw {
+        -ms-overflow-style: none;
+      }
+
+      .clear-fixed {
+        height: 50px;
       }
       .bgc {
         background: @bgColor;
@@ -610,7 +592,6 @@ export default {
           overflow: hidden;
           position: relative;
           padding: 0 15px 0 13px;
-
           .swiper-wrapper {
             width: 100%;
             .swiper-slide {
@@ -647,9 +628,7 @@ export default {
             }
           }
         }
-
         // 产品模块
-
         @media screen and (max-width: 320px) {
           .product-module {
             height: 96px;
@@ -665,7 +644,6 @@ export default {
         @media screen and (min-width: 330px) {
           .product-module {
             height: 79px;
-
             .product-list {
               .product-item {
                 span {
@@ -676,12 +654,9 @@ export default {
           }
         }
         .product-module {
-          // width: 375px;
-
           overflow: hidden;
           margin-bottom: 5px;
           padding: 12px 15px 0 15px;
-
           .product-list {
             .product-item {
               width: 45px;
@@ -703,11 +678,10 @@ export default {
             }
           }
         }
+      }
 
-        .line {
-          height: 1px;
-          // background-color: #f5f5f5;
-        }
+      .line {
+        height: 1px;
       }
 
       // 新音乐
@@ -719,7 +693,6 @@ export default {
         border-radius: 13px;
         .new-music-title {
           display: flex;
-          position: relative;
           margin-bottom: 15px;
           font-size: 17px;
           color: rgb(156, 156, 156);
@@ -730,10 +703,11 @@ export default {
           .new-cd {
             margin: 0 10px 0 10px;
           }
-          .new-album {
-            // flex: 1;
+          .pos-style {
+            flex: 1;
           }
-          .more {
+          .new-music-more {
+            color: black;
           }
         }
       }
@@ -748,20 +722,15 @@ export default {
         .ranking-title {
           display: flex;
           font-size: 17px;
-          // position: relative;
-          // padding-left: 3px;
           background-color: #ffffff;
           margin-bottom: 15px;
           .title {
+            flex: 1;
           }
-         
         }
         .ranking-type-container {
           .ranking-type {
             width: 328px;
-            // height: 220px;
-            // float: left;
-            //  box-shadow:-1px -3px 0px #F8F8F8;
             box-shadow: 0px 0px 10px rgb(238, 238, 238);
             border-radius: 8px;
             padding-top: 15px;
@@ -821,16 +790,26 @@ export default {
           }
         }
       }
+
+      ul {
+        li {
+          width: 100px;
+          height: 200px;
+        }
+      }
     }
-    // 我的
-    .swiper-slide-personal {
-      padding: 0 10px 0 10px;
-      overflow: hidden;
-      background-color: rgb(11, 240, 99);
-    }
-    // 云村
-    .swiper-slide-community {
-      background-color: rgb(248, 13, 178);
+    .slide2 {
+      height: 100%;
+      width: 100%;
+      overflow-y: scroll;
+      //   background-color: rgb(72, 255, 0);
+
+      ul {
+        li {
+          width: 100px;
+          height: 200px;
+        }
+      }
     }
   }
 }

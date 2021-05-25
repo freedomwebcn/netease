@@ -6,13 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport"
     content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-  <link rel="stylesheet" href="./reset.css">
+  <!-- <link rel="stylesheet" href="./reset.css"> -->
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="http://at.alicdn.com/t/font_938791_s18tbxq24d.css">
 
 
   <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+
+
   <script>
     if ('addEventListener' in document) {
       document.addEventListener('DOMContentLoaded', function () {
@@ -25,12 +28,18 @@
       box-sizing: border-box;
     }
 
- 
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
-    html,body {
+   
+
+    html,
+    body {
       max-width: 540px;
+      height: 100%;
+
       margin: 0 auto !important;
-      overflow: hidden;
     }
   </style>
 </head>
@@ -41,19 +50,16 @@
   <!-- built files will be auto injected -->
 
   <script>
-     /*
+    /*
       禁止浏览器下拉
         Swiper容器内部的bscroll会冒泡到swiper的触摸事件，如果短促地斜着45度滑动页面，第二个slide部分页面会固定出现在第一个slide页面，如果阻止bs冒泡，又会导致swiper不能切换（因为slide页面在bs管理的content滚动区域）
         为Bs添加配置eventPassthrough:让横向为原生滚动，虽然可以解决页面第二屏出现在第一屏的情况，但是在QQ内置浏览器会因为这个选项，滑动页面时，无法下拉卷上去的网页内容，只会下拉QQ自带的背景，
     */
-    document.body.addEventListener('touchmove', (e) => {
-      e.preventDefault()
-    }, {
-      passive: false
-    })
-
-
-
+    // document.body.addEventListener('touchmove', (e) => {
+    //   e.preventDefault()
+    // }, {
+    //   passive: false
+    // })
   </script>
 </body>
 

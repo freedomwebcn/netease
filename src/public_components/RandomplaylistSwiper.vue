@@ -2,8 +2,8 @@
   <div>
     <div class="random-song-swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide song-container slide1 ref='songContainer'">
-          <div class="song-info-container clearfix">
+        <div class="swiper-slide song-container slide-1 ref='songContainer'">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
 
@@ -22,7 +22,7 @@
             <div class="line border-bottom-1px"></div>
           </div>
 
-          <div class="song-info-container clearfix mt">
+          <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
@@ -38,7 +38,7 @@
             <div class="line border-bottom-1px"></div>
           </div>
 
-          <div class="song-info-container clearfix">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
@@ -53,8 +53,8 @@
           </div>
         </div>
 
-        <div class="swiper-slide song-container slide2">
-          <div class="song-info-container clearfix">
+        <div class="swiper-slide song-container slide-2">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="cd-mask"></div>
@@ -72,7 +72,7 @@
             <div class="line border-bottom-1px"></div>
           </div>
 
-          <div class="song-info-container clearfix mt">
+          <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
@@ -87,7 +87,7 @@
 
             <div class="line border-bottom-1px"></div>
           </div>
-          <div class="song-info-container clearfix mt">
+          <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="song-info">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
@@ -103,8 +103,8 @@
             <div class="line border-bottom-1px"></div>
           </div>
         </div>
-        <div class="swiper-slide song-container slide3">
-          <div class="song-info-container clearfix">
+        <div class="swiper-slide song-container slide-3">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -119,7 +119,7 @@
             </p>
             <div class="line border-bottom-1px"></div>
           </div>
-          <div class="song-info-container mt clearfix">
+          <div class="song-info-container mt clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -134,7 +134,7 @@
             </p>
             <div class="line border-bottom-1px"></div>
           </div>
-          <div class="song-info-container clearfix">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -150,8 +150,8 @@
             <div class="line"></div>
           </div>
         </div>
-        <div class="swiper-slide song-container slide4">
-          <div class="song-info-container clearfix">
+        <div class="swiper-slide song-container slide-4">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -166,7 +166,7 @@
             </p>
             <div class="line border-bottom-1px"></div>
           </div>
-          <div class="song-info-container mt clearfix">
+          <div class="song-info-container mt clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -181,7 +181,7 @@
             </p>
             <div class="line border-bottom-1px"></div>
           </div>
-          <div class="song-info-container clearfix">
+          <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="song-info">
@@ -311,14 +311,22 @@ export default {
         float: left;
         // p元素没内容 行高等于图片的高度 有内容 行高是 图片高度的一半
         line-height: 25px;
+     
+
         // 18
         // padding-top: 18px;
+        .ellipsis {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
         .song-name {
           float: left;
           max-width: 230px;
           font-size: 15px;
           margin-right: 2px;
         }
+
         .singer {
           float: left;
           color: #a6a6a6;
@@ -334,6 +342,7 @@ export default {
 
         i {
           display: inline-block;
+          font-style: normal;
           // width: 30px;
           height: 16px;
           line-height: 15px;

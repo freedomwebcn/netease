@@ -3,7 +3,12 @@
     <div class="recommend-playlist">
       <div class="title-text">
         <h3 class="l-title">{{title}}</h3>
-        <More></More>
+
+        <More moreText="更多">
+          <template #right>
+            <i class="iconfont icon-dayuhao"></i>
+          </template>
+        </More>
       </div>
       <Playlist></Playlist>
     </div>
@@ -13,16 +18,14 @@
 import Playlist from "@components/Playlist/Playlist";
 import More from "@/public_components/More";
 
-
 export default {
   props: {
-    title: String,
+    title: String
   },
   components: {
     Playlist,
     More
-  },
-
+  }
 };
 </script>
 
@@ -41,7 +44,6 @@ export default {
       font-size: 17px;
       font-weight: 700;
     }
-   
   }
 }
 </style>
