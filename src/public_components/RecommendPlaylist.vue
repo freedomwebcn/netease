@@ -10,7 +10,7 @@
           </template>
         </More>
       </div>
-      <Playlist></Playlist>
+      <Playlist :playlistInfo='resRecommendPlaylist'></Playlist>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ import More from "@/public_components/More";
 
 export default {
   props: {
-    title: String
+    title: String,
+    resRecommendPlaylist:Array
   },
   components: {
     Playlist,

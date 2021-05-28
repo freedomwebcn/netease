@@ -1,0 +1,15 @@
+.border-radius(@border-radius-size, @border-color: red, @left: 0, @top: -1px, ) {
+    &::after {
+        content: "";
+        position: absolute;
+        left: @left;
+        top: @top;
+        border: 1px solid @border-color;
+        width: 200%;
+        height: 200%;
+        border-radius: @border-radius-size;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+    }
+
+}

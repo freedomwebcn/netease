@@ -6,32 +6,32 @@
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-
             <div class="cd-mask"></div>
 
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
             </div>
             <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
             <p class="describe">
-              <!-- <i>独家</i> -->
+              <i class="ico">独家</i>
               <span class="font-color">云音乐飙升榜</span>
             </p>
+
             <div class="line border-bottom-1px"></div>
           </div>
 
           <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">{{songName}}</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
             </div>
             <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
             <p class="describe">
-              <i class>独家</i>
+              <i>独家</i>
               <span>云音乐飙升榜</span>
             </p>
 
@@ -40,7 +40,7 @@
 
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话童天的</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -59,7 +59,7 @@
             <div class="play-mask iconfont icon-bofang2"></div>
             <div class="cd-mask"></div>
 
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -74,7 +74,7 @@
 
           <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话童天的</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -89,7 +89,7 @@
           </div>
           <div class="song-info-container clear-fix mt">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话童天的</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -107,7 +107,7 @@
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -122,7 +122,7 @@
           <div class="song-info-container mt clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -137,7 +137,7 @@
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -154,7 +154,7 @@
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -169,7 +169,7 @@
           <div class="song-info-container mt clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-25 pt">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -184,7 +184,7 @@
           <div class="song-info-container clear-fix">
             <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
             <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info">
+            <div class="song-info line-h-50">
               <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
               <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
               <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
@@ -192,7 +192,7 @@
             <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
             <p class="describe">
               <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
+              <span class="font-color"></span>
             </p>
             <div class></div>
           </div>
@@ -205,6 +205,8 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
+
+
 export default {
   props: {
     songName: String
@@ -255,13 +257,13 @@ export default {
 
 
 <style lang="less" scope>
-.random-song-swiper {
-  // background-color: #fe3a3b;
-  // height: 200px;
+@import "../tools/border-1px.less";
 
+.random-song-swiper {
   .song-container {
     .song-info-container {
       position: relative;
+
       .line {
         width: 280px;
         height: 1px;
@@ -269,7 +271,6 @@ export default {
         bottom: 0;
         left: 54px;
         top: 54px;
-        // background-color: #eeeeee;
       }
       &.mt {
         margin-top: 10px;
@@ -309,12 +310,17 @@ export default {
       .song-info {
         width: 280px;
         float: left;
+        &.pt {
+          padding-top: 4px;
+        }
         // p元素没内容 行高等于图片的高度 有内容 行高是 图片高度的一半
-        line-height: 25px;
-     
+        &.line-h-25{
+          line-height: 25px;
+        }
+        &.line-h-50 {
+          line-height: 50px;
+        }
 
-        // 18
-        // padding-top: 18px;
         .ellipsis {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -335,24 +341,19 @@ export default {
       }
       .describe {
         float: left;
-        height: 20px;
-        line-height: 20px;
         width: 280px;
-        padding-top: 1px;
-
+        padding-top: 2px;
         i {
           display: inline-block;
           font-style: normal;
-          // width: 30px;
-          height: 16px;
-          line-height: 15px;
+          position: relative;
+          padding: 1px 1px 1px 2px;
           margin-right: 5px;
           text-align: center;
-
-          border: 1px solid rgb(230, 55, 55);
           color: hsl(360, 99%, 61%);
-          border-radius: 3px;
+          .border-radius(6px);
         }
+
         span {
           color: #f6b622;
           &.font-color {

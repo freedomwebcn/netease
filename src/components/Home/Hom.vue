@@ -72,16 +72,7 @@ export default {
   },
   data() {
     return {
-      // 页面切换后的索引
-      slideIndex: 0,
-      placeholder: "",
-      // 分页器数量
-      bannerSwiperPaginationCount: 0,
-      // 当前分页器索引
-      bannerSwiperPaginationIndex: 0,
-      // 禁止触摸滑动
-      allowTouchMove: true,
-      newMusicListIsShow: 0
+      
     };
   },
   mounted() {
@@ -114,18 +105,7 @@ export default {
   computed: {},
 
   methods: {
-    newMusicTabChange(event) {
-      const idx = event ? event.target.dataset.index : 0;
-      const newMusicTitleChildren = this.$refs.newMusicTitle.children;
-      const newMusicContentChildren = this.$refs.newMusicContent.children;
-
-      newMusicContentChildren.forEach((item, index) => {
-        newMusicTitleChildren[index].classList.remove("on");
-        item.style = "display:none";
-        newMusicTitleChildren[idx].classList.add("on");
-        newMusicContentChildren[idx].style = "display:block";
-      });
-    },
+   
 
     // 初始化三个slide页面的swiper
     _initHomeSwiper() {
@@ -147,76 +127,13 @@ export default {
       // this._initRanking();
     },
 
-    // 初始化轮播
-    _initBannerSwiper() {
-      this.bannerSwiper = new Swiper(".banner-container", {
-        resistanceRatio: 0, //取消回弹
-        touchMoveStopPropagation: true,
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          type: "custom",
-          renderCustom: (swiper, current, total) => {
-            // total : 分页器总数
-            // current: 当前激活的分页器下标 从 1 开始
-            this.bannerSwiperPaginationCount = total;
-            this.bannerSwiperPaginationIndex = current - 1;
-          }
-        },
-        spaceBetween: 20
-      });
-      this.$nextTick(() => {
-        //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
-        this.setSwiperPaginationContainerWidth();
-      });
-    },
+   
 
-    // 设置分页器容器宽度
-    setSwiperPaginationContainerWidth() {
-      // 获取分页器容器中的子元素
-      const swiperPaginationChildrens = Array.from(
-        this.$refs.swiperPaginationContainer.children
-      );
-      const swiperPaginationChild = swiperPaginationChildrens[0];
-      // 获取分页器容器中第一个子元素的宽度 + 右外边距
-      const getMargin =
-        getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
-      const getWidth = swiperPaginationChild.clientWidth;
-      const swiperPaginationChildrensSize =
-        (getMargin + getWidth) * swiperPaginationChildrens.length -
-        getMargin +
-        "px";
-      // 设置分页器容器的宽度
-      this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
-    },
+   
 
-    // 初始化产品模块
-    _initProductModule() {
-      this.productModuleSwiper = new Swiper(".product-module", {
-        resistanceRatio: 0.6,
-        slidesPerView: "auto",
-        spaceBetween: 15,
-        freeMode: true,
-        nested: true,
-        freeModeMinimumVelocity: 0.1
-      });
-    },
+   
 
-    // 初始化排行榜
-    _initRanking() {
-      this.rankingSwiper = new Swiper(".ranking-type-container", {
-        nested: true,
-
-        spaceBetween: 11,
-        slidesPerView: "auto",
-        resistanceRatio: 0.6,
-        slidesOffsetAfter: 20
-      });
-    },
+   
 
     // tab 切换后的index值
     tabChangeIndex: function(tabIndex) {
@@ -252,54 +169,7 @@ export default {
   // height: calc(100vh - 61px);
   height: 100vh;
   .swiper-wrapper {
-    header {
-      height: 50px;
-      padding-left: 15px;
-      padding-right: 15px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      position: fixed;
-      z-index: 99999;
-      width: 100%;
-      background: @bgColor;
-
-      .l-more {
-        width: 20px;
-        height: 20px;
-        font-size: 20px;
-        font-weight: 600;
-      }
-      .m-search {
-        flex: 1;
-        height: 30px;
-        position: relative;
-        color: rgb(155, 155, 155);
-
-        .icon-search {
-          position: absolute;
-          left: 23px;
-          top: 4px;
-          font-size: 22px;
-        }
-        .jump-search {
-          input {
-            width: 90%;
-            height: 100%;
-            padding-left: 28px;
-            border-radius: 15px;
-            line-height: normal;
-            outline: none;
-            border: 0;
-            font-size: 15px;
-            background-color: rgb(248, 248, 248);
-          }
-        }
-      }
-      .r-rec {
-        .l-more();
-      }
-    }
+   
     .swiper-slide {
     }
     // 发现页面
@@ -320,216 +190,12 @@ export default {
         height: 100%;
         overflow-y: scroll;
       }
-      .bgc {
-        background: @bgColor;
-        border-bottom-right-radius: 15px;
-        border-bottom-left-radius: 15px;
-        // 轮播
-        .banner-container {
-          width: 100%;
-          height: 146px;
-          overflow: hidden;
-          position: relative;
-          padding: 0 15px 0 13px;
-          .swiper-wrapper {
-            width: 100%;
-            .swiper-slide {
-              img {
-                width: 100%;
-                height: 100%;
-                border-radius: 11px;
-              }
-            }
-          }
-          // 分页器容器
-          .swiper-pagination-container {
-            display: flex;
-            justify-content: center;
-            height: 3px;
-            left: 50%;
-            transform: translateX(-50%);
-            // background-color: black;
-            .banner-swiper-pagination {
-              width: 10px;
-              height: 2px;
-              border-radius: 30px;
-              margin-right: 5px;
-              &:last-child {
-                margin-right: 0;
-              }
-              &.swiper-pagination-customs {
-                background-color: rgba(245, 244, 247, 0.3);
-              }
-              // 分页器激活的样式
-              &.swiper-pagination-customs-active {
-                background-color: rgb(255, 255, 255);
-              }
-            }
-          }
-        }
-
-        // 产品模块
-        @media screen and (max-width: 320px) {
-          .product-module {
-            height: 96px;
-            .product-list {
-              .product-item {
-                span {
-                  white-space: normal;
-                }
-              }
-            }
-          }
-        }
-        @media screen and (min-width: 330px) {
-          .product-module {
-            height: 79px;
-            .product-list {
-              .product-item {
-                span {
-                  white-space: nowrap;
-                }
-              }
-            }
-          }
-        }
-        .product-module {
-          overflow: hidden;
-          margin-bottom: 5px;
-          padding: 12px 15px 0 15px;
-          .product-list {
-            .product-item {
-              width: 45px;
-              height: 65px;
-              text-align: center;
-              .ico-product-item {
-                display: flex;
-                width: 100%;
-                height: 45px;
-                align-items: center;
-                justify-content: center;
-                flex: none;
-                margin-bottom: 5px;
-                border-radius: 50%;
-                font-size: 25px;
-                background-color: #fff1f1;
-                color: #fe3a3b;
-              }
-            }
-          }
-        }
-
-        .line {
-          height: 1px;
-        }
+     
+      
       }
 
-      // 新音乐
-      .new-music-container {
-        padding: 15px 15px 0 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        background-color: @bgColor;
-        border-radius: 13px;
-        .new-music-title {
-          display: flex;
-          margin-bottom: 15px;
-          font-size: 17px;
-          color: rgb(156, 156, 156);
-          .on {
-            color: black;
-            font-weight: 700;
-          }
-          .new-cd {
-            margin: 0 10px 0 10px;
-          }
-          .pos-style {
-            flex: 1;
-          }
-          .new-music-more {
-            color: black;
-          }
-        }
-      }
-      //  排行榜
-
-      .ranking {
-        height: 280px;
-        padding: 15px 15px 0 15px;
-        margin-bottom: 10px;
-        background-color: #ffffff;
-        border-radius: 13px;
-        .ranking-title {
-          display: flex;
-          font-size: 17px;
-          background-color: #ffffff;
-          margin-bottom: 15px;
-          .title {
-            flex: 1;
-          }
-        }
-        .ranking-type-container {
-          .ranking-type {
-            width: 328px;
-            box-shadow: 0px 0px 10px rgb(238, 238, 238);
-            border-radius: 8px;
-            padding-top: 15px;
-            padding-left: 10px;
-            padding-right: 8px;
-
-            .original-music {
-              font-size: 18px;
-              text-align: center;
-              .original-music-title {
-                font-weight: 700;
-              }
-            }
-            .original-music-info-container {
-              height: 50px;
-              line-height: 50px;
-              margin-bottom: 10px;
-
-              img {
-                width: 50px;
-                height: 100%;
-                float: left;
-                border-radius: 8px;
-              }
-              .original-music-sort {
-                float: left;
-                font-size: 13px;
-                font-weight: 700;
-                margin: 0 10px 0 10px;
-              }
-              .original-music-info {
-                float: left;
-                font-size: 13px;
-                .fz-style {
-                  font-size: 12px;
-                  color: #a7a7a7;
-                }
-              }
-              .ico {
-                width: 30px;
-                height: 100%;
-                float: right;
-                &.new {
-                  background: url("./img/ddd.png") no-repeat center center;
-                  background-size: 26px 7px;
-                  // background-color: #fe3a3b;
-                }
-
-                &.hot {
-                }
-                &.decrease-hot {
-                }
-                &.normal {
-                }
-              }
-            }
-          }
-        }
-      }
+   
+     
     }
     // 我的
     .swiper-slide-personal {

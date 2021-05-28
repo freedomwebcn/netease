@@ -14,29 +14,17 @@ export default {
 };
 </script>
 <style lang="less" scope>
+@import "../tools/border-1px.less";
 .r-more {
   display: flex;
   position: relative;
   top: -1px;
-  // right: 0px;
   padding: 3px 3px 3px 8px;
   font-size: 13px;
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -1px;
-    border: 1px solid #ebebeb;
-    /* background-color: red; */
-    width: 200%;
-    height: 200%;
-    border-radius: 26px;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-  }
+  .border-radius(26px, #ebebeb);
+
   i {
     font-size: 12px;
   }
-
 }
 </style>

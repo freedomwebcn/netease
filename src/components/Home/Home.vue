@@ -1,9 +1,9 @@
 <template>
   <div class="father">
     <div class="swiper-wrapper child">
-      <!-- 顶部搜索 -->
+      <!-- 搜索 -->
       <header id="header">
-        <div class="l-more iconfont icon-xianxinggengduo"></div>
+        <div class="l-more iconfont icon-xianxinggengduo" @click="show=true"></div>
         <div class="m-search">
           <i class="icon-search iconfont icon-sousuo"></i>
           <span class="jump-search">
@@ -12,73 +12,19 @@
         </div>
         <div class="r-rec iconfont icon-ziyuan"></div>
       </header>
-
-      <!-- 第一页 -->
+      <!-- 侧边栏 -->
+      <van-popup v-model="show" position="left" get-container="#app" duration="0.2">
+        <div class="side">1</div>
+      </van-popup>
+      <!-- 发现 -->
       <div class="swiper-slide slide1 scw">
         <div class="clear-fixed"></div>
         <!-- 轮播 -->
         <div class="bgc">
           <div class="banner-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/7rYfKJKoIT6vi_kbzeR2TQ==/109951165974295616.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/j618RbxQu03dOMwKctaiyg==/109951165975300062.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/-Qv32LewRtWvE85uNlDMLg==/109951165975283734.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/DhGemkvG6PWdKSgnmkSh7Q==/109951165975523779.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/HiUfSuVL6LxpRfnIUkj1TQ==/109951165974974852.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/gq26apb35rkNAALJsW_UhA==/109951165973754863.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/ll8kxyHkKDflkY0BmE59Bw==/109951165975541600.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/ZRIcQHSfJ5qJiJnJU5bBlw==/109951165975196925.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/1o7jBIqdCIq2mlt5JOYCaw==/109951165974556044.jpg"
-                  alt
-                />
-              </div>
-              <div class="swiper-slide">
-                <img
-                  src="http://p1.music.126.net/1Nvy2FYCiF1aEfgZR1cULw==/109951165974567008.jpg"
-                  alt
-                />
+              <div class="swiper-slide" v-for="(banner,index) in resBannersData" :key="index">
+                <img :src="banner.pic" alt />
               </div>
             </div>
             <!-- 分页器 -->
@@ -140,13 +86,13 @@
           <div class="line border-bottom-1px"></div>
 
           <!-- 推荐歌单  -->
-          <HotPlaylist title="推荐歌单"></HotPlaylist>
+          <RecommendPlaylist title="推荐歌单" :resRecommendPlaylist="resRecommendPlaylist"></RecommendPlaylist>
         </div>
 
         <!-- 随机推荐的歌 -->
         <RandomPlaylist></RandomPlaylist>
         <!-- 根据登录用户推荐 -->
-        <HotPlaylist title="你的雷达歌单"></HotPlaylist>
+        <RecommendPlaylist title="你的雷达歌单"></RecommendPlaylist>
 
         <!-- 新音乐 -->
         <div class="new-music-container">
@@ -379,14 +325,15 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
-import HotPlaylist from "@/public_components/HotPlaylist";
+import RecommendPlaylist from "@/public_components/RecommendPlaylist";
 import RandomPlaylist from "@/public_components/RandomPlaylist";
 import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
 import More from "@/public_components/More";
+import { reqBanner, reqRecommendPlaylist } from "@/api";
 export default {
   components: {
     // FooterTabBar,
-    HotPlaylist,
+    RecommendPlaylist,
     RandomPlaylist,
     RandomplaylistSwiper,
     More
@@ -402,10 +349,19 @@ export default {
       bannerSwiperPaginationIndex: 0,
       // 禁止触摸滑动
       allowTouchMove: true,
-      newMusicListIsShow: 0
+      // newMusicListIsShow: 0,
+      show: false,
+      resBannersData: [],
+      resRecommendPlaylist: []
     };
   },
-  mounted() {
+  async mounted() {
+    // 轮播图数据
+    const bannersData = await reqBanner({ type: 2 });
+    this.resBannersData = bannersData.banners;
+    // 推荐歌单数据
+    const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
+    this.resRecommendPlaylist = recommendPlaylistData.result;
     this.init();
   },
   methods: {
@@ -413,7 +369,6 @@ export default {
       const idx = event ? event.target.dataset.index : 0;
       const newMusicTitleChildren = this.$refs.newMusicTitle.children;
       const newMusicContentChildren = this.$refs.newMusicContent.children;
-
       newMusicContentChildren.forEach((item, index) => {
         newMusicTitleChildren[index].classList.remove("on");
         item.style = "display:none";
@@ -425,6 +380,7 @@ export default {
       const fatherSwiper = new Swiper(".father", {
         resistanceRatio: 0 //取消回弹
       });
+
       this._initBannerSwiper();
       this._initProductModule();
       this.newMusicTabChange();
@@ -434,10 +390,13 @@ export default {
     // 初始化轮播
     _initBannerSwiper() {
       this.bannerSwiper = new Swiper(".banner-container", {
+        observer: true,
+        observeSlideChildren: true,
         resistanceRatio: 0, //取消回弹
         touchMoveStopPropagation: true,
         nested: true,
         loop: true,
+        spaceBetween: 25,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false
@@ -451,8 +410,7 @@ export default {
             this.bannerSwiperPaginationCount = total;
             this.bannerSwiperPaginationIndex = current - 1;
           }
-        },
-        spaceBetween: 20
+        }
       });
       this.$nextTick(() => {
         //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
@@ -465,8 +423,8 @@ export default {
       const swiperPaginationChildrens = Array.from(
         this.$refs.swiperPaginationContainer.children
       );
+      // 获取分页器容器中第一个子元素
       const swiperPaginationChild = swiperPaginationChildrens[0];
-      // 获取分页器容器中第一个子元素的宽度 + 右外边距
       const getMargin =
         getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
       const getWidth = swiperPaginationChild.clientWidth;
@@ -482,10 +440,12 @@ export default {
       this.productModuleSwiper = new Swiper(".product-module", {
         resistanceRatio: 0.6,
         slidesPerView: "auto",
-        spaceBetween: 15,
+        spaceBetween: 25,
         freeMode: true,
         nested: true,
-        freeModeMinimumVelocity: 0.1
+      
+         freeModeMomentumBounce: false,
+        freeModeMinimumVelocity:0.2
       });
     },
 
@@ -493,7 +453,6 @@ export default {
     _initRanking() {
       this.rankingSwiper = new Swiper(".ranking-type-container", {
         nested: true,
-
         spaceBetween: 11,
         slidesPerView: "auto",
         resistanceRatio: 0.6,
@@ -506,6 +465,19 @@ export default {
 
 <style lang="less" scope>
 @bgColor: #ffffff;
+#app {
+  .van-overlay {
+    top: 1px;
+  }
+  .van-popup {
+    .side {
+      width: 80vw;
+      height: 100vh;
+      background-color: rgb(245, 245, 245);
+    }
+    overflow: hidden;
+  }
+}
 .father {
   height: 100%;
   overflow-x: hidden;
@@ -558,6 +530,7 @@ export default {
         .l-more();
       }
     }
+
     .slide1 {
       height: 100%;
       width: 100%;
@@ -566,7 +539,7 @@ export default {
       overflow-x: hidden;
       //   chrome去除滚动条样式
 
-      & ::-webkit-scrollbar {
+      &::-webkit-scrollbar {
         display: none;
       }
       //   兼容火狐
@@ -591,7 +564,7 @@ export default {
           height: 146px;
           overflow: hidden;
           position: relative;
-          padding: 0 15px 0 13px;
+          padding: 0 15px 0 14px;
           .swiper-wrapper {
             width: 100%;
             .swiper-slide {

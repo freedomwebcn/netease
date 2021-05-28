@@ -2,48 +2,11 @@
   <div>
     <div class="playlist">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
+        <div class="swiper-slide" v-for="(item,index) in playlistInfo" :key="index">
           <div class="playlist-info">
-            <i class="iconfont icon-play">
-              111
-            </i>
-            <img src="https://p2.music.126.net/zyiAnTJpsfHPSPVCVPXSEA==/109951165764984626.jpg" alt />
-            <p>歌单名歌单名字歌单名字歌单名字歌单名字歌单名字字</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="playlist-info">
-            <i class="iconfont icon-play">65565</i>
-            <img src="https://p2.music.126.net/fob5pHV3xzGlJ_-KEeLFLg==/109951165693966983.jpg" alt />
-            <p>歌单单名单名单名名字</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="playlist-info">
-            <i class="iconfont icon-play">956589</i>
-            <img src="https://p2.music.126.net/8gx1rLiemXwoKE6fKyq8PA==/109951165291292392.jpg" alt />
-            <p>歌单单名单名单名单名名字</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="playlist-info">
-            <i class="iconfont icon-play">1555</i>
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <p>歌单名单名单名单名单名字</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="playlist-info">
-            <i class="iconfont icon-play">2222233</i>
-            <img src="https://p2.music.126.net/5ZGoG1vfDhp87eDdMgnIyg==/109951165827587074.jpg" alt />
-            <p>歌单名字</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="playlist-info">
-            <i class="iconfont icon-play">666666</i>
-            <img src="https://p2.music.126.net/kOwruiTgpTyUVJ_m6uCqJw==/109951165969903755.jpg" alt />
-            <p>歌单单名单名单名单名单名单名单名单名单名名字</p>
+            <i class="iconfont icon-play">{{item.playCount | formatPlayCount}}</i>
+            <img :src="item.picUrl" alt />
+            <p>{{item.name}}</p>
           </div>
         </div>
       </div>
@@ -55,6 +18,7 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
+import "@/tools/filter.js";
 export default {
   props: {
     playlistInfo: Array
@@ -64,18 +28,19 @@ export default {
   },
   mounted() {
     this._initSwiper();
-    // console.log(this.slidesPerView);
   },
   methods: {
     _initSwiper() {
-      var mySwiper = new Swiper(".playlist", {
-        // loop: true, // 循环模式选项
+      const mySwiper = new Swiper(".playlist", {
+        observer: true,
+        observeSlideChildren: true,
         spaceBetween: 10,
+        slidesPerView: "auto",
         resistanceRatio: 0.6,
-        slidesPerView: 3.5,
-        // touchMoveStopPropagation: true,
         freeMode: true,
-        freeModeMinimumVelocity: 0.1
+        freeModeMomentumBounce: false,
+        freeModeMinimumVelocity:0.2
+        
       });
     }
   }
@@ -88,16 +53,17 @@ export default {
   padding-left: 15px;
   padding-right: 15px;
   overflow: hidden;
- 
+
   .swiper-wrapper {
     margin-top: 5px;
     .swiper-slide {
       border-radius: 10px;
-      height: 100px;
+      width: 100px;
+      // height: 100px;
       &::before {
         content: "";
         display: block;
-        width: 86px;
+        width: 92px;
         height: 10px;
         background-color: #f2f2f2;
         position: absolute;
@@ -117,10 +83,11 @@ export default {
           right: 5px;
           top: 4px;
           background-color: rgba(0, 0, 0, 0.3);
-          height: 13px;
+          padding-top: 2px;
+          padding-bottom: 2px;
           font-size: 12px;
-          padding-left: 2px;
-          padding-right: 2px;
+          padding-left: 3px;
+          padding-right: 3px;
           border-radius: 15px;
         }
 
