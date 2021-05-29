@@ -15,3 +15,5 @@ export const reqRecommendPlaylist = ({limit}) => ajax('/personalized', {
         limit
     }
 })
+// 3、随机推荐的歌
+export const reqRandomSong = () => ajax('personalized/newsong')

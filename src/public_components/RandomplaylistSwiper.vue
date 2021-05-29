@@ -2,199 +2,40 @@
   <div>
     <div class="random-song-swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide song-container slide-1 ref='songContainer'">
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="cd-mask"></div>
-
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
+        <div
+          class="swiper-slide song-container slide-1 ref='songContainer'"
+          v-for="(randomSongInfoArr,index) in filterRandomSongData"
+          :key="index"
+        >
+          <div
+            class="song-info-container clear-fix mt"
+            v-for="(songInfo,index) in randomSongInfoArr"
+            :key="index"
+            :data-id="songInfo.id"
+          >
+            <img :src="songInfo.picUrl" alt />
+            <div class="play-mask iconfont icon-bofang2" v-if="songInfo.randomSong"></div>
+            <div class="cd-mask" v-else></div>
+            <div
+              class="song-info pt"
+              :class="`${songInfo.describe && songInfo.describe.isShow? 'line-h-25 ':'line-h-50'}`"
+            >
+              <h3 class="song-name ellipsis">{{songInfo.songName}}</h3>
+              <span class="singer ellipsis">- &nbsp;{{songInfo.artists}}</span>
             </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <i class="ico">独家</i>
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
 
-            <div class="line border-bottom-1px"></div>
-          </div>
-
-          <div class="song-info-container clear-fix mt">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">{{songName}}</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <i>独家</i>
-              <span>云音乐飙升榜</span>
+            <p class="describe" v-if="songInfo.describe">
+              <i class="ico" v-if="songInfo.describe.mark">{{songInfo.describe.mark}}</i>
+              <span
+                class="font-color"
+                v-if="songInfo.describe.describeText"
+              >{{songInfo.describe.describeText}}</span>
             </p>
 
-            <div class="line border-bottom-1px"></div>
-          </div>
-
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话童天的</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <i>独家</i>
-              <span>云音乐飙升榜</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="swiper-slide song-container slide-2">
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="cd-mask"></div>
-
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line border-bottom-1px"></div>
-          </div>
-
-          <div class="song-info-container clear-fix mt">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话童天的</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <i>独家</i>
-              <span>云音乐飙升榜</span>
-            </p>
-
-            <div class="line border-bottom-1px"></div>
-          </div>
-          <div class="song-info-container clear-fix mt">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话童天的</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <i>独家</i>
-              <span>云音乐飙升榜</span>
-            </p>
-
-            <div class="line border-bottom-1px"></div>
-          </div>
-        </div>
-        <div class="swiper-slide song-container slide-3">
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line border-bottom-1px"></div>
-          </div>
-          <div class="song-info-container mt clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line border-bottom-1px"></div>
-          </div>
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line"></div>
-          </div>
-        </div>
-        <div class="swiper-slide song-container slide-4">
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line border-bottom-1px"></div>
-          </div>
-          <div class="song-info-container mt clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-25 pt">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color">云音乐飙升榜</span>
-            </p>
-            <div class="line border-bottom-1px"></div>
-          </div>
-          <div class="song-info-container clear-fix">
-            <img src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg" alt />
-            <div class="play-mask iconfont icon-bofang2"></div>
-            <div class="song-info line-h-50">
-              <!-- 童话（冬天的记忆小巷里面吹过晚风） -->
-              <h3 class="song-name ellipsis">童话话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天话童话里面吹过晚风（冬天</h3>
-              <span class="singer ellipsis">- &nbsp;Santa_SA / 马也_Crabbit</span>
-            </div>
-            <!--  p元素没内容 动态设置行高等于图片的高度 有内容 行高是 图片高度的一半 -->
-            <p class="describe">
-              <!-- <i>独家</i> -->
-              <span class="font-color"></span>
-            </p>
-            <div class></div>
+            <div
+              class="line border-bottom-1px"
+              v-if="songInfo === randomSongInfoArr[randomSongInfoArr.length -1 ] ? false:true"
+            ></div>
           </div>
         </div>
       </div>
@@ -205,22 +46,67 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
-
+import _chunk from "lodash/chunk";
 
 export default {
   props: {
-    songName: String
+    songName: String,
+    randomSongData: Array
+  },
+  computed: {
+    filterRandomSongData() {
+      // debugger;
+      const { randomSongData } = this;
+      let songDescribe = [
+        { mark: "独家", describeText: "你好世界", isShow: true },
+        { mark: "SQ", describeText: "你好地球", isShow: true },
+        { mark: "原创", describeText: "你好啊", isShow: true },
+        { mark: "", describeText: "你好吗", isShow: true },
+        { mark: "", describeText: "你好呀", isShow: true },
+        { mark: "", describeText: "", isShow: false }
+      ];
+
+      if (randomSongData) {
+        let randomSongArr = randomSongData.reduce(
+          (accumulator, currentValue) => {
+            let str = "";
+            currentValue.song.artists.forEach(item => {
+              str += item.name + " ";
+            });
+
+            accumulator.push({
+              id: currentValue.id,
+              picUrl: currentValue.picUrl,
+              songName: currentValue.name,
+              artists: str,
+              describe: songDescribe[Math.floor(Math.random() * 7)],
+              // // 区分每首歌所在的板块，控制遮罩的显示
+              randomSong: true
+            });
+            return accumulator;
+          },
+          []
+        );
+        this.$nextTick(() => {
+          this.setMaxWidth();
+        });
+        return _chunk(randomSongArr, 3);
+      }
+    }
   },
   mounted() {
     this._initRandomSongSwiper();
   },
+
+  updated() {},
   methods: {
     // 初始化随机歌曲
     _initRandomSongSwiper() {
       this.randomSongSwiper = new Swiper(".random-song-swiper", {
+        observer: true,
+        observeSlideChildren: true,
         resistanceRatio: 0 //取消回弹
       });
-      this.setMaxWidth();
     },
 
     // 设置类名singer最大宽度
@@ -314,7 +200,7 @@ export default {
           padding-top: 4px;
         }
         // p元素没内容 行高等于图片的高度 有内容 行高是 图片高度的一半
-        &.line-h-25{
+        &.line-h-25 {
           line-height: 25px;
         }
         &.line-h-50 {

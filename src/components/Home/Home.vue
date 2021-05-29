@@ -1,7 +1,7 @@
 <template>
   <div class="father">
     <div class="swiper-wrapper child">
-      <!-- 搜索 -->
+      <!-- 头部搜索 -->
       <header id="header">
         <div class="l-more iconfont icon-xianxinggengduo" @click="show=true"></div>
         <div class="m-search">
@@ -88,12 +88,10 @@
           <!-- 推荐歌单  -->
           <RecommendPlaylist title="推荐歌单" :resRecommendPlaylist="resRecommendPlaylist"></RecommendPlaylist>
         </div>
-
         <!-- 随机推荐的歌 -->
-        <RandomPlaylist></RandomPlaylist>
+        <RandomPlaylist :randomSongData='randomSongData'></RandomPlaylist>
         <!-- 根据登录用户推荐 -->
         <RecommendPlaylist title="你的雷达歌单"></RecommendPlaylist>
-
         <!-- 新音乐 -->
         <div class="new-music-container">
           <div class="new-music-title" ref="newMusicTitle">
@@ -119,7 +117,6 @@
             </div>
           </div>
         </div>
-
         <!-- 排行榜 -->
         <div class="ranking">
           <div class="ranking-title">
@@ -269,29 +266,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li>10</li>
-          <li>11</li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-          <li>15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
-          <li>20</li>
-        </ul>-->
       </div>
 
       <div class="swiper-slide slide2">
@@ -329,7 +303,7 @@ import RecommendPlaylist from "@/public_components/RecommendPlaylist";
 import RandomPlaylist from "@/public_components/RandomPlaylist";
 import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
 import More from "@/public_components/More";
-import { reqBanner, reqRecommendPlaylist } from "@/api";
+import { reqBanner, reqRecommendPlaylist,reqRandomSong } from "@/api";
 export default {
   components: {
     // FooterTabBar,
@@ -352,7 +326,8 @@ export default {
       // newMusicListIsShow: 0,
       show: false,
       resBannersData: [],
-      resRecommendPlaylist: []
+      resRecommendPlaylist: [],
+      randomSongData:[]
     };
   },
   async mounted() {
@@ -362,6 +337,10 @@ export default {
     // 推荐歌单数据
     const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
     this.resRecommendPlaylist = recommendPlaylistData.result;
+    const randomSongData = await reqRandomSong();
+    this.randomSongData = randomSongData.result
+
+
     this.init();
   },
   methods: {
@@ -443,9 +422,8 @@ export default {
         spaceBetween: 25,
         freeMode: true,
         nested: true,
-      
-         freeModeMomentumBounce: false,
-        freeModeMinimumVelocity:0.2
+        freeModeMomentumBounce: false,
+        freeModeMinimumVelocity: 0.2
       });
     },
 
