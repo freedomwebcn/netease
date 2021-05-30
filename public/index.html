@@ -41,18 +41,7 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
 
-  <script>
-    /*
-      禁止浏览器下拉
-        Swiper容器内部的bscroll会冒泡到swiper的触摸事件，如果短促地斜着45度滑动页面，第二个slide部分页面会固定出现在第一个slide页面，如果阻止bs冒泡，又会导致swiper不能切换（因为slide页面在bs管理的content滚动区域）
-        为Bs添加配置eventPassthrough:让横向为原生滚动，虽然可以解决页面第二屏出现在第一屏的情况，但是在QQ内置浏览器会因为这个选项，滑动页面时，无法下拉卷上去的网页内容，只会下拉QQ自带的背景，
-    */
-    // document.body.addEventListener('touchmove', (e) => {
-    //   e.preventDefault()
-    // }, {
-    //   passive: false
-    // })
-  </script>
+  
 </body>
 
 </html>

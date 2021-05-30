@@ -86,12 +86,12 @@
           <div class="line border-bottom-1px"></div>
 
           <!-- 推荐歌单  -->
-          <RecommendPlaylist title="推荐歌单" :resRecommendPlaylist="resRecommendPlaylist"></RecommendPlaylist>
+          <RecommendPlaylist title="推荐歌单" :playlistData="recommendPlaylistData"></RecommendPlaylist>
         </div>
-        <!-- 随机推荐的歌 -->
-        <RandomPlaylist :randomSongData='randomSongData'></RandomPlaylist>
-        <!-- 根据登录用户推荐 -->
-        <RecommendPlaylist title="你的雷达歌单"></RecommendPlaylist>
+        <!-- 推荐的歌 -->
+        <RecommendMusic :recommendMusicData="recommendMusicData"></RecommendMusic>
+        <!-- 热门歌单 -->
+        <RecommendPlaylist title="热门歌单" :playlistData="hotPlaylistData"></RecommendPlaylist>
         <!-- 新音乐 -->
         <div class="new-music-container">
           <div class="new-music-title" ref="newMusicTitle">
@@ -107,13 +107,13 @@
           </div>
           <div class="new-music-content" ref="newMusicContent">
             <div class="new-song-list">
-              <RandomplaylistSwiper songName="第一页"></RandomplaylistSwiper>
+              <RecommendMusicSwiper songName="第一页"></RecommendMusicSwiper>
             </div>
             <div class="new-cd-list">
-              <RandomplaylistSwiper songName="第二页"></RandomplaylistSwiper>
+              <RecommendMusicSwiper songName="第二页"></RecommendMusicSwiper>
             </div>
             <div class="new-album-list">
-              <RandomplaylistSwiper songName="第三页"></RandomplaylistSwiper>
+              <RecommendMusicSwiper songName="第三页"></RecommendMusicSwiper>
             </div>
           </div>
         </div>
@@ -299,17 +299,24 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
-import RecommendPlaylist from "@/public_components/RecommendPlaylist";
-import RandomPlaylist from "@/public_components/RandomPlaylist";
-import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
+import RecommendPlaylist from "@/public_components/RecommendPlaylist/RecommendPlaylist";
+
+import RecommendMusic from "@/public_components/RecommendMusic/RecommendMusic";
+import RecommendMusicSwiper from "@/public_components/RecommendMusic/RecommendMusicSwiper";
+
 import More from "@/public_components/More";
-import { reqBanner, reqRecommendPlaylist,reqRandomSong } from "@/api";
+import {
+  reqBanner,
+  reqRecommendPlaylist,
+  reqRandomSong,
+  reqHotPlaylist
+} from "@/api";
 export default {
   components: {
     // FooterTabBar,
     RecommendPlaylist,
-    RandomPlaylist,
-    RandomplaylistSwiper,
+    RecommendMusic,
+    RecommendMusicSwiper,
     More
   },
   data() {
@@ -325,9 +332,14 @@ export default {
       allowTouchMove: true,
       // newMusicListIsShow: 0,
       show: false,
+      // banner数据
       resBannersData: [],
-      resRecommendPlaylist: [],
-      randomSongData:[]
+      // 推荐的歌单数据
+      recommendPlaylistData: [],
+      // 推荐音乐
+      recommendMusicData: [],
+      // 热门歌单数据
+      hotPlaylistData: []
     };
   },
   async mounted() {
@@ -336,10 +348,13 @@ export default {
     this.resBannersData = bannersData.banners;
     // 推荐歌单数据
     const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
-    this.resRecommendPlaylist = recommendPlaylistData.result;
-    const randomSongData = await reqRandomSong();
-    this.randomSongData = randomSongData.result
-
+    this.recommendPlaylistData = recommendPlaylistData.result;
+    // 随机歌
+    const recommendMusicData = await reqRandomSong();
+    this.recommendMusicData = recommendMusicData.result;
+    // 热门歌单
+    const hotPlaylistData = await reqHotPlaylist();
+    this.hotPlaylistData = hotPlaylistData.playlists;
 
     this.init();
   },

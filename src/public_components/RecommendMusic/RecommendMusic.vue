@@ -13,20 +13,20 @@
       </More>
     </div>
 
-    <RandomplaylistSwiper :randomSongData='randomSongData'></RandomplaylistSwiper>
+    <RecommendMusicSwiper :recommendMusicData='recommendMusicData'></RecommendMusicSwiper>
   </div>
 </template>
 
 
 <script>
-import RandomplaylistSwiper from "@/public_components/RandomplaylistSwiper";
+import RecommendMusicSwiper from "@/public_components/RecommendMusic/RecommendMusicSwiper";
 import More from "@/public_components/More";
 export default {
   props: {
-    randomSongData:Array
+    recommendMusicData:Array
   },
   components: {
-    RandomplaylistSwiper,
+    RecommendMusicSwiper,
     More
   }
 };

@@ -15,5 +15,11 @@ export const reqRecommendPlaylist = ({limit}) => ajax('/personalized', {
         limit
     }
 })
-// 3、随机推荐的歌
+// 3、新歌
 export const reqRandomSong = () => ajax('personalized/newsong')
+
+// 4、热门歌单
+export const reqHotPlaylist = () => ajax('top/playlist?limit=6&order=hot')
+
+
+
