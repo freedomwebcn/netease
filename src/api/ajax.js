@@ -6,28 +6,20 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(function (config) {
-    config.xhrFields = {
-        withCredentials: true, //关键
-    }
-    // 在发送请求之前做些什么
+
+    config.withCredentials = true
+    
     return config;
 }, function (error) {
-    // 对请求错误做些什么
     return Promise.reject(error);
 });
 
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
-    // 对响应数据做点什么
     return response.data
 }, function (error) {
-        
-        alert(error)
+    alert(error)
     console.log(error);
-
-
-
-
 });
 
 

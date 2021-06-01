@@ -1,6 +1,6 @@
 
 <template>
-  <div  class="recommend-playlist-container">
+  <div class="recommend-playlist-container">
     <div class="recommend-playlist">
       <div class="title-text">
         <h3 class="l-title">{{title}}</h3>
@@ -11,12 +11,12 @@
         </More>
       </div>
     </div>
-    <div class="playlist">
+    <div class="playlist" ref="playlistSwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(item,index) in playlistData" :key="index">
           <div class="playlist-info" :data-id="item.id">
             <i class="iconfont icon-play">{{item.playCount | formatPlayCount}}</i>
-            <img :src="item.picUrl || item.coverImgUrl" alt />
+            <img :src="`${item.picUrl || item.coverImgUrl}?param=200y200`" alt />
             <p>{{item.name}}</p>
           </div>
         </div>
@@ -43,14 +43,17 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    this._iniPlaylistSwiper();
+  watch: {
+    playlistData() {
+      this.$nextTick(() => {
+        this._iniPlaylistSwiper();
+      });
+    }
   },
+  mounted() {},
   methods: {
     _iniPlaylistSwiper() {
-      const mySwiper = new Swiper(".playlist", {
-        observer: true,
-        observeSlideChildren: true,
+      const mySwiper = new Swiper(this.$refs.playlistSwiper, {
         spaceBetween: 10,
         slidesPerView: "auto",
         resistanceRatio: 0.6,
@@ -61,12 +64,12 @@ export default {
     }
   }
 };
-</script>
+</script> 
 
 <style lang="less" scoped>
 .recommend-playlist-container {
   background: #ffffff;
-   border-top-right-radius: 13px;
+  border-top-right-radius: 13px;
   border-top-left-radius: 13px;
   border-bottom-right-radius: 13px;
   border-bottom-left-radius: 13px;

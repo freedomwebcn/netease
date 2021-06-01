@@ -89,7 +89,7 @@
           <RecommendPlaylist title="推荐歌单" :playlistData="recommendPlaylistData"></RecommendPlaylist>
         </div>
         <!-- 推荐的歌 -->
-        <RecommendMusic :recommendMusicData="recommendMusicData"></RecommendMusic>
+        <RecommendMusic :recommendMusicData="filteRecommendNewSongData"></RecommendMusic>
         <!-- 热门歌单 -->
         <RecommendPlaylist title="热门歌单" :playlistData="hotPlaylistData"></RecommendPlaylist>
         <!-- 新音乐 -->
@@ -106,14 +106,18 @@
             </More>
           </div>
           <div class="new-music-content" ref="newMusicContent">
+           
+
             <div class="new-song-list">
-              <RecommendMusicSwiper songName="第一页"></RecommendMusicSwiper>
+              <RecommendMusicSwiper :recommendMusicData="filteRecommendNewSongData"></RecommendMusicSwiper>
             </div>
+
             <div class="new-cd-list">
-              <RecommendMusicSwiper songName="第二页"></RecommendMusicSwiper>
+              <RecommendMusicSwiper :recommendMusicData=" filteRecommendNewCdData"></RecommendMusicSwiper>
             </div>
-            <div class="new-album-list">
-              <RecommendMusicSwiper songName="第三页"></RecommendMusicSwiper>
+
+             <div class="new-album-list">
+              <RecommendMusicSwiper :recommendMusicData="filteRecommendNewAlbumData"></RecommendMusicSwiper>
             </div>
           </div>
         </div>
@@ -300,16 +304,18 @@
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
 import RecommendPlaylist from "@/public_components/RecommendPlaylist/RecommendPlaylist";
-
 import RecommendMusic from "@/public_components/RecommendMusic/RecommendMusic";
 import RecommendMusicSwiper from "@/public_components/RecommendMusic/RecommendMusicSwiper";
-
 import More from "@/public_components/More";
+import _chunk from "lodash/chunk";
+
 import {
   reqBanner,
   reqRecommendPlaylist,
   reqRandomSong,
-  reqHotPlaylist
+  reqHotPlaylist,
+  reqNewCd,
+  reqNewAlbum
 } from "@/api";
 export default {
   components: {
@@ -321,6 +327,14 @@ export default {
   },
   data() {
     return {
+      songDescribe: [
+        { mark: "独家", describeText: "你好世界", isShow: true },
+        { mark: "SQ", describeText: "你好地球", isShow: true },
+        { mark: "原创", describeText: "你好啊", isShow: true },
+        { mark: "", describeText: "你好吗", isShow: true },
+        { mark: "", describeText: "你好呀", isShow: true },
+        { mark: "", describeText: "", isShow: false }
+      ],
       // 页面切换后的索引
       slideIndex: 0,
       placeholder: "",
@@ -339,8 +353,76 @@ export default {
       // 推荐音乐
       recommendMusicData: [],
       // 热门歌单数据
-      hotPlaylistData: []
+      hotPlaylistData: [],
+      // 新碟
+      newCdData: [],
+      // 新专辑
+      newAlbumData: []
     };
+  },
+
+  computed: {
+    filteRecommendNewSongData() {
+      // debugger;
+      const { recommendMusicData } = this;
+      if (recommendMusicData) {
+        let songArr = recommendMusicData.reduce((accumulator, currentValue) => {
+          let str = "";
+          currentValue.song.artists.forEach(item => {
+            str += item.name + " ";
+          });
+          accumulator.push({
+            id: currentValue.id,
+            picUrl: currentValue.picUrl,
+            songName: currentValue.name,
+            artists: str,
+            describe: this.songDescribe[Math.floor(Math.random() * 7)],
+            isShowMask: false
+          });
+          return accumulator;
+        }, []);
+
+        return _chunk(songArr, 3);
+      }
+    },
+
+    filteRecommendNewCdData() {
+      const { newCdData } = this;
+      if (newCdData) {
+        let newCdArr = newCdData.reduce((accumulator, currentValue) => {
+          accumulator.push({
+            id: currentValue.id,
+            picUrl: currentValue.picUrl,
+            songName: currentValue.name,
+            artists: currentValue.artist.name,
+            describe: this.songDescribe[Math.floor(Math.random() * 7)],
+            isShowMask: true
+          });
+
+          return accumulator;
+        }, []);
+        return _chunk(newCdArr, 3);
+      }
+    },
+
+    filteRecommendNewAlbumData() {
+      const { newAlbumData } = this;
+      if (newAlbumData) {
+        let newAlbumArr = newAlbumData.reduce((accumulator, currentValue) => {
+          accumulator.push({
+            id: currentValue.albumId,
+            picUrl: currentValue.coverUrl,
+            songName: currentValue.albumName,
+            artists: currentValue.artistName,
+            describe: this.songDescribe[Math.floor(Math.random() * 7)],
+            isShowMask: true
+          });
+
+          return accumulator;
+        }, []);
+        return _chunk(newAlbumArr, 3);
+      }
+    }
   },
   async mounted() {
     // 轮播图数据
@@ -349,26 +431,43 @@ export default {
     // 推荐歌单数据
     const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
     this.recommendPlaylistData = recommendPlaylistData.result;
-    // 随机歌
+    // 推荐的音乐
     const recommendMusicData = await reqRandomSong();
     this.recommendMusicData = recommendMusicData.result;
+
     // 热门歌单
     const hotPlaylistData = await reqHotPlaylist();
     this.hotPlaylistData = hotPlaylistData.playlists;
+    // 新碟
+    // const newCdData = await reqNewCd();
+    // this.newCdData = newCdData.albums;
+    // // 新专辑
+    // const newAlbumData = await reqNewAlbum();
+    // this.newAlbumData = newAlbumData.products;
 
     this.init();
   },
   methods: {
-    newMusicTabChange(event) {
-      const idx = event ? event.target.dataset.index : 0;
+    async newMusicTabChange(event) {
+      let idx = event ? event.target.dataset.index : 0;
       const newMusicTitleChildren = this.$refs.newMusicTitle.children;
       const newMusicContentChildren = this.$refs.newMusicContent.children;
       newMusicContentChildren.forEach((item, index) => {
         newMusicTitleChildren[index].classList.remove("on");
-        item.style = "display:none";
+        item.style = "display:none ";
         newMusicTitleChildren[idx].classList.add("on");
         newMusicContentChildren[idx].style = "display:block";
       });
+      if (idx == 1 && !this.newCdData.length) {
+        // 新碟
+        const newCdData = await reqNewCd();
+        this.newCdData = newCdData.albums;
+      }
+      if (idx == 2 && !this.newAlbumData.length) {
+        // 新专辑
+        const newAlbumData = await reqNewAlbum();
+        this.newAlbumData = newAlbumData.products;
+      }
     },
     init() {
       const fatherSwiper = new Swiper(".father", {
@@ -652,6 +751,7 @@ export default {
 
       // 新音乐
       .new-music-container {
+        height: 232px;
         padding: 15px 15px 0 15px;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -659,7 +759,7 @@ export default {
         border-radius: 13px;
         .new-music-title {
           display: flex;
-          margin-bottom: 15px;
+          margin-bottom: 0px;
           font-size: 17px;
           color: rgb(156, 156, 156);
           .on {

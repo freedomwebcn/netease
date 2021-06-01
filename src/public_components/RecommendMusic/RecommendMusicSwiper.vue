@@ -1,31 +1,30 @@
-
-
-
-
-<template>
+<template >
   <div>
-    <div class="random-song-swiper">
+    <div class="random-song-swiper" ref="musicSwiper">
       <div class="swiper-wrapper">
         <div
           class="swiper-slide song-container slide-1 ref='songContainer'"
-          v-for="(randomSongInfoArr,index) in filteRecommendMusicData"
+          v-for="(randomSongInfoArr,index) in recommendMusicData"
           :key="index"
         >
           <div
             class="song-info-container clear-fix mt"
             v-for="(songInfo,index) in randomSongInfoArr"
             :key="index"
-            :data-id="songInfo.id"
+            :data-id="`${songInfo && songInfo.id}`"
           >
-            <img :src="songInfo.picUrl" alt />
-            <div class="play-mask iconfont icon-bofang2" v-if="!songInfo.isNewMusic"></div>
+            <!-- <template v-if="songInfo"> -->
+            <img :src="`${songInfo.picUrl}?param=100y100`" alt />
+            <div class="play-mask iconfont icon-bofang2" v-if="!songInfo.isShowMask"></div>
             <div class="cd-mask" v-else></div>
             <div
-              class="song-info"
+              class="song-info clear-fix"
               :class="`${songInfo.describe && songInfo.describe.isShow? 'line-h-25 pt':'line-h-50'}`"
+              ref="songInfo"
             >
               <h3 class="song-name ellipsis">{{songInfo.songName}}</h3>
-              <span class="singer ellipsis">- &nbsp;{{songInfo.artists}}</span>
+              <i class="separator">-</i>
+              <span class="singer ellipsis">{{songInfo.artists}}</span>
             </div>
 
             <p class="describe" v-if="songInfo.describe">
@@ -40,6 +39,7 @@
               class="line border-bottom-1px"
               v-if="songInfo === randomSongInfoArr[randomSongInfoArr.length -1 ] ? false:true"
             ></div>
+            <!-- </template> -->
           </div>
         </div>
       </div>
@@ -50,92 +50,38 @@
 <script>
 import "swiper/css/swiper.min.css";
 import Swiper from "swiper/js/swiper.js";
-import _chunk from "lodash/chunk";
+import { setSingerMaxWidth } from "@/tools/setW";
 
 export default {
   props: {
     recommendMusicData: Array
   },
   data() {
-    return {
-      songDescribe: [
-        { mark: "独家", describeText: "你好世界", isShow: true },
-        { mark: "SQ", describeText: "你好地球", isShow: true },
-        { mark: "原创", describeText: "你好啊", isShow: true },
-        { mark: "", describeText: "你好吗", isShow: true },
-        { mark: "", describeText: "你好呀", isShow: true },
-        { mark: "", describeText: "", isShow: false }
-      ]
-    };
+    return {};
   },
-  computed: {
-    filteRecommendMusicData() {
-      // debugger;
-      const { recommendMusicData } = this;
-      if (recommendMusicData) {
-        let songArr = recommendMusicData.reduce((accumulator, currentValue) => {
-          let str = "";
-          currentValue.song.artists.forEach(item => {
-            str += item.name + " ";
-          });
-          accumulator.push({
-            id: currentValue.id,
-            picUrl: currentValue.picUrl,
-            songName: currentValue.name,
-            artists: str,
-            describe: this.songDescribe[Math.floor(Math.random() * 7)],
-            // // 区分每首歌所在的板块，控制遮罩的显示
-            isNewMusic: false
-          });
-          return accumulator;
-        }, []);
-        this.$nextTick(() => {
-          this.setMaxWidth();
-        });
-        return _chunk(songArr, 3);
-      }
+  computed: {},
+  watch: {
+    recommendMusicData(newV) {
+      this.$nextTick(() => {
+        this._initMusicSwiper();
+        /*必须把当前复用组件的ref引用传过去，不然获取到的是所有复用该组件的dom元素*/
+        setSingerMaxWidth(this.$refs.songInfo);
+        // console.log(this.$refs.musicSwiper);
+        
+      });
     }
   },
   mounted() {
-    this._initRecommendMusicSwiper();
+    
   },
 
-  updated() {},
   methods: {
-    _initRecommendMusicSwiper() {
-      this.recommendMusicSwiper = new Swiper(".random-song-swiper", {
-        observer: true,
-        observeSlideChildren: true,
+    _initMusicSwiper() {
+      /* 这里同样也要把ref引用传进去，不能直接传ClASS，
+      不然的话所有的复用组件实例 初始化的都是同一个Swiper，到时候会出现各种问题 */
+      this.mySwiper = new Swiper(this.$refs.musicSwiper, {
+        slidesPerView: 'auto',
         resistanceRatio: 0 //取消回弹
-      });
-    },
-
-    // 设置类名singer最大宽度
-    setMaxWidth() {
-      const songInfoArr = Array.from(
-        document.getElementsByClassName("song-info")
-      );
-      // debugger;
-      songInfoArr.forEach((songInfo, index) => {
-        // debugger;
-        // 获取父元素总宽
-        const songInfo_W = songInfo.clientWidth;
-        // 获取子元素歌名的宽度
-        const songName_W = songInfo.children[0].clientWidth;
-        // 获取歌名的最大宽度
-        const songNameMax_W = getComputedStyle(songInfo.children[0]).maxWidth;
-        const formatSongNameMax_W = parseInt(songNameMax_W.slice(0, -2));
-        if (songName_W < formatSongNameMax_W) {
-          // 父容器的宽度减去歌名的宽度
-          const set_W = songInfo_W - songName_W;
-          // 设置歌手的最大宽度
-          songInfo.children[1].style.maxWidth = set_W - 4 + "px";
-          // songInfo.children[1].style.color = "red";
-        } else {
-          // 父容器宽度 减去歌名容器的最大宽 - 2个外边距
-          const set_W = songInfo_W - formatSongNameMax_W - 4;
-          songInfo.children[1].style.maxWidth = set_W + "px";
-        }
       });
     }
   }
@@ -157,6 +103,7 @@ export default {
         bottom: 0;
         left: 60px;
         top: 54px;
+
         // background-color: red;
       }
       &.mt {
@@ -217,7 +164,12 @@ export default {
           float: left;
           max-width: 230px;
           font-size: 15px;
-          margin-right: 2px;
+        }
+        .separator {
+          float: left;
+          color: #a6a6a6;
+
+          margin: 0 2px;
         }
 
         .singer {

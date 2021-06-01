@@ -21,5 +21,11 @@ export const reqRandomSong = () => ajax('personalized/newsong')
 // 4、热门歌单
 export const reqHotPlaylist = () => ajax('top/playlist?limit=6&order=hot')
 
+// 5、新碟
+export const reqNewCd = () => ajax('album/newest')
+
+// 4、数字专辑
+export const reqNewAlbum = () => ajax('album/list?limit=6')
+
 
 

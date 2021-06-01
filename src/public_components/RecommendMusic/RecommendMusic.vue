@@ -47,7 +47,6 @@ export default {
   .title {
     display: flex;
     // position: relative;
-    margin-bottom: 10px;
     .title-text {
       flex: 1;
       font-weight: 700;
