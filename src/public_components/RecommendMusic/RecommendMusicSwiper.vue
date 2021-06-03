@@ -1,6 +1,6 @@
 <template >
   <div>
-    <div class="random-song-swiper" ref="musicSwiper">
+    <div class="recommend-music-swiper" ref="musicSwiper">
       <div class="swiper-wrapper">
         <div
           class="swiper-slide song-container slide-1 ref='songContainer'"
@@ -61,26 +61,21 @@ export default {
   },
   computed: {},
   watch: {
-    recommendMusicData(newV) {
+    recommendMusicData() {
       this.$nextTick(() => {
         this._initMusicSwiper();
         /*必须把当前复用组件的ref引用传过去，不然获取到的是所有复用该组件的dom元素*/
         setSingerMaxWidth(this.$refs.songInfo);
-        // console.log(this.$refs.musicSwiper);
-        
       });
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
 
   methods: {
     _initMusicSwiper() {
-      /* 这里同样也要把ref引用传进去，不能直接传ClASS，
-      不然的话所有的复用组件实例 初始化的都是同一个Swiper，到时候会出现各种问题 */
+      /* 同样需要传入ref引用 */
+      // this.$refs.musicSwiper
       this.mySwiper = new Swiper(this.$refs.musicSwiper, {
-        slidesPerView: 'auto',
         resistanceRatio: 0 //取消回弹
       });
     }
@@ -91,7 +86,7 @@ export default {
 
 <style lang="less" scope>
 @import "../../tools/border-1px.less";
-.random-song-swiper {
+.recommend-music-swiper {
   .song-container {
     .song-info-container {
       position: relative;

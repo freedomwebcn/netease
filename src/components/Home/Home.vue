@@ -21,7 +21,7 @@
         <div class="clear-fixed"></div>
         <!-- 轮播 -->
         <div class="bgc">
-          <div class="banner-container">
+          <div class="banner-container" ref="bannerContainer">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(banner,index) in resBannersData" :key="index">
                 <img :src="banner.pic" alt />
@@ -106,8 +106,6 @@
             </More>
           </div>
           <div class="new-music-content" ref="newMusicContent">
-           
-
             <div class="new-song-list">
               <RecommendMusicSwiper :recommendMusicData="filteRecommendNewSongData"></RecommendMusicSwiper>
             </div>
@@ -116,7 +114,7 @@
               <RecommendMusicSwiper :recommendMusicData=" filteRecommendNewCdData"></RecommendMusicSwiper>
             </div>
 
-             <div class="new-album-list">
+            <div class="new-album-list">
               <RecommendMusicSwiper :recommendMusicData="filteRecommendNewAlbumData"></RecommendMusicSwiper>
             </div>
           </div>
@@ -131,140 +129,37 @@
               </template>
             </More>
           </div>
-          <div class="ranking-type-container">
+          <div class="ranking-type-container" ref="rankingTypeContainer">
             <div class="swiper-wrapper">
-              <div class="swiper-slide ranking-type">
+              <template></template>
+              <div
+                class="swiper-slide ranking-type"
+                v-for="(topListData,index) in filterTopListData"
+                :key="index"
+              >
                 <!-- 原创音乐 -->
-                <div class="original-music">
-                  <h3 class="original-music-title">原创榜</h3>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
+                <div v-for="(topItem,index) in topListData" :key="index">
+                  <div class="original-music">
+                    <h3
+                      class="original-music-title"
+                      :data-id="topItem.topListId"
+                    >{{topItem.topListName}}</h3>
                   </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">2</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
+                  <div
+                    class="original-music-info-container clearfix"
+                    v-for="(songInfo,index) in topItem.songInfoArr"
+                    :key="index"
+                    :data-id="songInfo.id"
+                  >
+                    <img :src="`${songInfo.pic}?param=100y100`" alt />
+                    <span class="original-music-sort">{{index + 1}}</span>
+                    <div class="original-music-info">
+                      <span class="original-music-name ellipsis">{{songInfo.name}}</span>
+                      <i style="margin: 0 3px 0 3px" class="separator">-</i>
+                      <span class="original-music-singer ellipsis">{{songInfo.singerName}}</span>
+                    </div>
+                    <i class="ico new"></i>
                   </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">3</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px" class="fz-style">-</i>
-                    <span class="original-music-singer fz-style">声音碎片乐队</span>
-                  </div>
-                  <i class="ico new"></i>
-                </div>
-              </div>
-              <div class="swiper-slide ranking-type">
-                <div class="original-music">
-                  <h3 class="original-music-title">日本榜</h3>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
-                </div>
-              </div>
-              <div class="swiper-slide ranking-type">
-                <!-- 原创音乐 -->
-                <div class="original-music">
-                  <h3 class="original-music-title">欧美榜</h3>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
-                </div>
-                <div class="original-music-info-container clearfix">
-                  <img
-                    src="https://p2.music.126.net/THc2dGCHBcMLuRlwQjccFg==/109951165210824295.jpg"
-                    alt
-                  />
-                  <span class="original-music-sort">1</span>
-                  <div class="original-music-info">
-                    <span class="original-music-name">黄金时代</span>
-                    <i style="margin: 0 3px 0 3px">-</i>
-                    <span class="original-music-singer">声音碎片乐队</span>
-                  </div>
-                  <i class="icofont"></i>
                 </div>
               </div>
             </div>
@@ -308,6 +203,7 @@ import RecommendMusic from "@/public_components/RecommendMusic/RecommendMusic";
 import RecommendMusicSwiper from "@/public_components/RecommendMusic/RecommendMusicSwiper";
 import More from "@/public_components/More";
 import _chunk from "lodash/chunk";
+import { setSingerMaxWidth } from "@/tools/setW";
 
 import {
   reqBanner,
@@ -315,7 +211,8 @@ import {
   reqRandomSong,
   reqHotPlaylist,
   reqNewCd,
-  reqNewAlbum
+  reqNewAlbum,
+  reqTopList
 } from "@/api";
 export default {
   components: {
@@ -357,7 +254,10 @@ export default {
       // 新碟
       newCdData: [],
       // 新专辑
-      newAlbumData: []
+      newAlbumData: [],
+      // 排行榜
+      topListData: [],
+      testarr: []
     };
   },
 
@@ -422,31 +322,77 @@ export default {
         }, []);
         return _chunk(newAlbumArr, 3);
       }
+    },
+    filterTopListData() {
+      // 排行榜数据
+      const { topListData } = this;
+      // debugger;
+      if (topListData.length) {
+        let toplist = topListData.reduce((accumulator, currentValue) => {
+          let songInfoArr = [];
+          // 收集每首歌的信息
+          let collectTopListSongInfo = {};
+          // currentValue: 当前榜单
+          // tracks数组: 当前榜单内所有的歌曲
+          currentValue.tracks.slice(0, 3).forEach(topListSongInfo => {
+            collectTopListSongInfo.name = topListSongInfo.al.name;
+            collectTopListSongInfo.id = topListSongInfo.id;
+            collectTopListSongInfo.singerName = "";
+            collectTopListSongInfo.pic = topListSongInfo.al.picUrl;
+            // ar数组: 存放的是歌手名
+            topListSongInfo.ar.forEach(singer => {
+              collectTopListSongInfo.singerName += singer.name + "/";
+            });
+            collectTopListSongInfo.singerName = collectTopListSongInfo.singerName.slice(
+              0,
+              -1
+            );
+            songInfoArr.push(collectTopListSongInfo);
+            collectTopListSongInfo = {};
+          });
+          accumulator.push([
+            {
+              topListName: currentValue.name,
+              topListId: currentValue.id,
+              songInfoArr
+            }
+          ]);
+
+          return accumulator;
+        }, []);
+        this.$nextTick(() => {
+          this._initRanking();
+          setSingerMaxWidth();
+        });
+        return toplist;
+      }
     }
   },
   async mounted() {
+    this.init();
     // 轮播图数据
     const bannersData = await reqBanner({ type: 2 });
     this.resBannersData = bannersData.banners;
+    this.$nextTick(() => {
+      this._initBannerSwiper();
+    });
     // 推荐歌单数据
     const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
     this.recommendPlaylistData = recommendPlaylistData.result;
     // 推荐的音乐
     const recommendMusicData = await reqRandomSong();
     this.recommendMusicData = recommendMusicData.result;
-
     // 热门歌单
     const hotPlaylistData = await reqHotPlaylist();
     this.hotPlaylistData = hotPlaylistData.playlists;
-    // 新碟
-    // const newCdData = await reqNewCd();
-    // this.newCdData = newCdData.albums;
-    // // 新专辑
-    // const newAlbumData = await reqNewAlbum();
-    // this.newAlbumData = newAlbumData.products;
-
-    this.init();
+    // 排行榜
+    const topListData = await reqTopList();
+    topListData.forEach(async topList => {
+      let r = await topList;
+      this.topListData.push(r.playlist);
+    });
   },
+  watch: {},
   methods: {
     async newMusicTabChange(event) {
       let idx = event ? event.target.dataset.index : 0;
@@ -474,17 +420,13 @@ export default {
         resistanceRatio: 0 //取消回弹
       });
 
-      this._initBannerSwiper();
       this._initProductModule();
       this.newMusicTabChange();
-      this._initRanking();
     },
 
     // 初始化轮播
     _initBannerSwiper() {
-      this.bannerSwiper = new Swiper(".banner-container", {
-        observer: true,
-        observeSlideChildren: true,
+      this.bannerSwiper = new Swiper(this.$refs.bannerContainer, {
         resistanceRatio: 0, //取消回弹
         touchMoveStopPropagation: true,
         nested: true,
@@ -543,10 +485,11 @@ export default {
 
     // 初始化排行榜
     _initRanking() {
-      this.rankingSwiper = new Swiper(".ranking-type-container", {
+      this.rankingSwiper = new Swiper(this.$refs.rankingTypeContainer, {
         nested: true,
         spaceBetween: 11,
         slidesPerView: "auto",
+        observer: true,
         resistanceRatio: 0.6,
         slidesOffsetAfter: 20
       });
@@ -830,6 +773,23 @@ export default {
               .original-music-info {
                 float: left;
                 font-size: 13px;
+                width: 200px;
+                .ellipsis {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                }
+                .original-music-name {
+                  float: left;
+                  max-width: 160px;
+                }
+                .separator {
+                  float: left;
+                }
+                .original-music-singer {
+                  float: left;
+                }
+
                 .fz-style {
                   font-size: 12px;
                   color: #a7a7a7;
