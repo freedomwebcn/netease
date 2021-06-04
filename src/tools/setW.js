@@ -1,7 +1,7 @@
 // 设置类名singer最大宽度
-function setSingerMaxWidth(el) {
-    // debugger
-    let musicInfo = el || Array.from(document.querySelectorAll(".original-music-info"))
+function setSingerMaxWidth(refel, dom) {
+    // 复用组件传ref引用 页面内某个模块用 传dom元素
+    let musicInfo = refel || Array.from(document.querySelectorAll(dom))
     // 获取父元素宽
     const songInfo_W = Math.ceil(musicInfo[0].clientWidth);
     musicInfo.forEach((songInfo, index) => {
@@ -9,7 +9,7 @@ function setSingerMaxWidth(el) {
         const songName_W = Math.ceil(songInfo.children[0].clientWidth);
         // 歌名的最大宽度
         const songNameMax_W = Math.ceil(getComputedStyle(songInfo.children[0]).maxWidth.slice(0, -2))
-        // 获取 分隔符的左右外边距 和宽度 
+        // 获取 分割符 的左右外边距 和宽度 
         const separator_M = Math.ceil(getComputedStyle(songInfo.children[1]).marginLeft.slice(0, -2) * 2);
         const separator_W = Math.ceil(songInfo.children[1].clientWidth);
         // 如果歌名的宽度小于它的最大宽度

@@ -38,9 +38,9 @@ export const reqTopList = async () => {
     const toplistData = await ajax('toplist/detail')
     //取前三条数据
     toplistData.list.slice(0, 3).forEach((item) => {
-       topListDetailData = reqTopListDetail(item.id)
+        topListDetailData = reqTopListDetail(item.id)
         ids.push(topListDetailData)
-    }); 
+    });
     return ids
 }
 

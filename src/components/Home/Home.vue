@@ -28,16 +28,10 @@
               </div>
             </div>
             <!-- 分页器 -->
-            <div
-              class="swiper-pagination swiper-pagination-container"
-              ref="swiperPaginationContainer"
-            >
-              <div
-                v-for="(count, index) in bannerSwiperPaginationCount"
-                :key="index"
+            <div class="swiper-pagination swiper-pagination-container" ref="swiperPaginationContainer">
+              <div v-for="(count, index) in bannerSwiperPaginationCount" :key="index"
                 :class="index === bannerSwiperPaginationIndex ? 'swiper-pagination-customs-active':'swiper-pagination-customs'"
-                class="banner-swiper-pagination"
-              ></div>
+                class="banner-swiper-pagination"></div>
             </div>
           </div>
 
@@ -89,7 +83,7 @@
           <RecommendPlaylist title="推荐歌单" :playlistData="recommendPlaylistData"></RecommendPlaylist>
         </div>
         <!-- 推荐的歌 -->
-        <RecommendMusic :recommendMusicData="filteRecommendNewSongData"></RecommendMusic>
+        <RecommendMusic :recommendMusicData="filterRecommendNewSongData"></RecommendMusic>
         <!-- 热门歌单 -->
         <RecommendPlaylist title="热门歌单" :playlistData="hotPlaylistData"></RecommendPlaylist>
         <!-- 新音乐 -->
@@ -107,15 +101,15 @@
           </div>
           <div class="new-music-content" ref="newMusicContent">
             <div class="new-song-list">
-              <RecommendMusicSwiper :recommendMusicData="filteRecommendNewSongData"></RecommendMusicSwiper>
+              <RecommendMusicSwiper :recommendMusicData="filterRecommendNewSongData"></RecommendMusicSwiper>
             </div>
 
             <div class="new-cd-list">
-              <RecommendMusicSwiper :recommendMusicData=" filteRecommendNewCdData"></RecommendMusicSwiper>
+              <RecommendMusicSwiper :recommendMusicData=" filterRecommendNewCdData"></RecommendMusicSwiper>
             </div>
 
             <div class="new-album-list">
-              <RecommendMusicSwiper :recommendMusicData="filteRecommendNewAlbumData"></RecommendMusicSwiper>
+              <RecommendMusicSwiper :recommendMusicData="filterRecommendNewAlbumData"></RecommendMusicSwiper>
             </div>
           </div>
         </div>
@@ -129,28 +123,16 @@
               </template>
             </More>
           </div>
-          <div class="ranking-type-container" ref="rankingTypeContainer">
+          <div class="ranking-type-container" ref="topList">
             <div class="swiper-wrapper">
-              <template></template>
-              <div
-                class="swiper-slide ranking-type"
-                v-for="(topListData,index) in filterTopListData"
-                :key="index"
-              >
-                <!-- 原创音乐 -->
+              <div class="swiper-slide ranking-type" v-for="(topListData,index) in filterTopListData" :key="index">
+                <!-- 榜单 -->
                 <div v-for="(topItem,index) in topListData" :key="index">
                   <div class="original-music">
-                    <h3
-                      class="original-music-title"
-                      :data-id="topItem.topListId"
-                    >{{topItem.topListName}}</h3>
+                    <h3 class="original-music-title" :data-id="topItem.topListId">{{topItem.topListName}}</h3>
                   </div>
-                  <div
-                    class="original-music-info-container clearfix"
-                    v-for="(songInfo,index) in topItem.songInfoArr"
-                    :key="index"
-                    :data-id="songInfo.id"
-                  >
+                  <div class="original-music-info-container clearfix"
+                    v-for="(songInfo,index) in topItem.saveSongInfoArr" :key="index" :data-id="songInfo.id">
                     <img :src="`${songInfo.pic}?param=100y100`" alt />
                     <span class="original-music-sort">{{index + 1}}</span>
                     <div class="original-music-info">
@@ -196,24 +178,16 @@
 </template>
 
 <script>
-import "swiper/css/swiper.min.css";
-import Swiper from "swiper/js/swiper.js";
-import RecommendPlaylist from "@/public_components/RecommendPlaylist/RecommendPlaylist";
-import RecommendMusic from "@/public_components/RecommendMusic/RecommendMusic";
-import RecommendMusicSwiper from "@/public_components/RecommendMusic/RecommendMusicSwiper";
-import More from "@/public_components/More";
-import _chunk from "lodash/chunk";
-import { setSingerMaxWidth } from "@/tools/setW";
+import 'swiper/css/swiper.min.css'
+import Swiper from 'swiper/js/swiper.js'
+import RecommendPlaylist from '@/public_components/RecommendPlaylist/RecommendPlaylist'
+import RecommendMusic from '@/public_components/RecommendMusic/RecommendMusic'
+import RecommendMusicSwiper from '@/public_components/RecommendMusic/RecommendMusicSwiper'
+import More from '@/public_components/More'
+import _chunk from 'lodash/chunk'
+import { setSingerMaxWidth } from '@/tools/setW'
 
-import {
-  reqBanner,
-  reqRecommendPlaylist,
-  reqRandomSong,
-  reqHotPlaylist,
-  reqNewCd,
-  reqNewAlbum,
-  reqTopList
-} from "@/api";
+import { reqBanner, reqRecommendPlaylist, reqRandomSong, reqHotPlaylist, reqNewCd, reqNewAlbum, reqTopList } from '@/api'
 export default {
   components: {
     // FooterTabBar,
@@ -225,16 +199,16 @@ export default {
   data() {
     return {
       songDescribe: [
-        { mark: "独家", describeText: "你好世界", isShow: true },
-        { mark: "SQ", describeText: "你好地球", isShow: true },
-        { mark: "原创", describeText: "你好啊", isShow: true },
-        { mark: "", describeText: "你好吗", isShow: true },
-        { mark: "", describeText: "你好呀", isShow: true },
-        { mark: "", describeText: "", isShow: false }
+        { mark: '独家', describeText: '你好世界', isShow: true },
+        { mark: 'SQ', describeText: '你好地球', isShow: true },
+        { mark: '原创', describeText: '你好啊', isShow: true },
+        { mark: '', describeText: '你好吗', isShow: true },
+        { mark: '', describeText: '你好呀', isShow: true },
+        { mark: '', describeText: '', isShow: false }
       ],
       // 页面切换后的索引
       slideIndex: 0,
-      placeholder: "",
+      placeholder: '',
       // 分页器数量
       bannerSwiperPaginationCount: 0,
       // 当前分页器索引
@@ -258,170 +232,163 @@ export default {
       // 排行榜
       topListData: [],
       testarr: []
-    };
-  },
-
-  computed: {
-    filteRecommendNewSongData() {
-      // debugger;
-      const { recommendMusicData } = this;
-      if (recommendMusicData) {
-        let songArr = recommendMusicData.reduce((accumulator, currentValue) => {
-          let str = "";
-          currentValue.song.artists.forEach(item => {
-            str += item.name + " ";
-          });
-          accumulator.push({
-            id: currentValue.id,
-            picUrl: currentValue.picUrl,
-            songName: currentValue.name,
-            artists: str,
-            describe: this.songDescribe[Math.floor(Math.random() * 7)],
-            isShowMask: false
-          });
-          return accumulator;
-        }, []);
-
-        return _chunk(songArr, 3);
-      }
-    },
-
-    filteRecommendNewCdData() {
-      const { newCdData } = this;
-      if (newCdData) {
-        let newCdArr = newCdData.reduce((accumulator, currentValue) => {
-          accumulator.push({
-            id: currentValue.id,
-            picUrl: currentValue.picUrl,
-            songName: currentValue.name,
-            artists: currentValue.artist.name,
-            describe: this.songDescribe[Math.floor(Math.random() * 7)],
-            isShowMask: true
-          });
-
-          return accumulator;
-        }, []);
-        return _chunk(newCdArr, 3);
-      }
-    },
-
-    filteRecommendNewAlbumData() {
-      const { newAlbumData } = this;
-      if (newAlbumData) {
-        let newAlbumArr = newAlbumData.reduce((accumulator, currentValue) => {
-          accumulator.push({
-            id: currentValue.albumId,
-            picUrl: currentValue.coverUrl,
-            songName: currentValue.albumName,
-            artists: currentValue.artistName,
-            describe: this.songDescribe[Math.floor(Math.random() * 7)],
-            isShowMask: true
-          });
-
-          return accumulator;
-        }, []);
-        return _chunk(newAlbumArr, 3);
-      }
-    },
-    filterTopListData() {
-      // 排行榜数据
-      const { topListData } = this;
-      // debugger;
-      if (topListData.length) {
-        let toplist = topListData.reduce((accumulator, currentValue) => {
-          let songInfoArr = [];
-          // 收集每首歌的信息
-          let collectTopListSongInfo = {};
-          // currentValue: 当前榜单
-          // tracks数组: 当前榜单内所有的歌曲
-          currentValue.tracks.slice(0, 3).forEach(topListSongInfo => {
-            collectTopListSongInfo.name = topListSongInfo.al.name;
-            collectTopListSongInfo.id = topListSongInfo.id;
-            collectTopListSongInfo.singerName = "";
-            collectTopListSongInfo.pic = topListSongInfo.al.picUrl;
-            // ar数组: 存放的是歌手名
-            topListSongInfo.ar.forEach(singer => {
-              collectTopListSongInfo.singerName += singer.name + "/";
-            });
-            collectTopListSongInfo.singerName = collectTopListSongInfo.singerName.slice(
-              0,
-              -1
-            );
-            songInfoArr.push(collectTopListSongInfo);
-            collectTopListSongInfo = {};
-          });
-          accumulator.push([
-            {
-              topListName: currentValue.name,
-              topListId: currentValue.id,
-              songInfoArr
-            }
-          ]);
-
-          return accumulator;
-        }, []);
-        this.$nextTick(() => {
-          this._initRanking();
-          setSingerMaxWidth();
-        });
-        return toplist;
-      }
     }
   },
+
   async mounted() {
-    this.init();
+    this.init()
     // 轮播图数据
-    const bannersData = await reqBanner({ type: 2 });
-    this.resBannersData = bannersData.banners;
+    const bannersData = await reqBanner({ type: 2 })
+    this.resBannersData = bannersData.banners
     this.$nextTick(() => {
-      this._initBannerSwiper();
-    });
+      this._initBannerSwiper()
+    })
     // 推荐歌单数据
-    const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 });
-    this.recommendPlaylistData = recommendPlaylistData.result;
+    const recommendPlaylistData = await reqRecommendPlaylist({ limit: 6 })
+    this.recommendPlaylistData = recommendPlaylistData.result
     // 推荐的音乐
-    const recommendMusicData = await reqRandomSong();
-    this.recommendMusicData = recommendMusicData.result;
+    const recommendMusicData = await reqRandomSong()
+    this.recommendMusicData = recommendMusicData.result
     // 热门歌单
-    const hotPlaylistData = await reqHotPlaylist();
-    this.hotPlaylistData = hotPlaylistData.playlists;
+    const hotPlaylistData = await reqHotPlaylist()
+    this.hotPlaylistData = hotPlaylistData.playlists
     // 排行榜
-    const topListData = await reqTopList();
+    const topListData = await reqTopList()
     topListData.forEach(async topList => {
-      let r = await topList;
-      this.topListData.push(r.playlist);
-    });
+      let r = await topList
+      this.topListData.push(r.playlist)
+    })
   },
   watch: {},
+  computed: {
+    filterRecommendNewSongData() {
+      // debugger;
+      const { recommendMusicData } = this
+      if (!recommendMusicData.length) return
+      let songArr = recommendMusicData.reduce((accumulator, currentValue) => {
+        let str = ''
+        currentValue.song.artists.forEach(item => {
+          str += item.name + ' '
+        })
+        accumulator.push({
+          id: currentValue.id,
+          picUrl: currentValue.picUrl,
+          songName: currentValue.name,
+          artists: str,
+          describe: this.songDescribe[Math.floor(Math.random() * 7)],
+          isShowMask: false
+        })
+        return accumulator
+      }, [])
+
+      return _chunk(songArr, 3)
+    },
+
+    filterRecommendNewCdData() {
+      const { newCdData } = this
+      if (!newCdData.length) return
+      let newCdArr = newCdData.reduce((accumulator, currentValue) => {
+        accumulator.push({
+          id: currentValue.id,
+          picUrl: currentValue.picUrl,
+          songName: currentValue.name,
+          artists: currentValue.artist.name,
+          describe: this.songDescribe[Math.floor(Math.random() * 7)],
+          isShowMask: true
+        })
+        return accumulator
+      }, [])
+      return _chunk(newCdArr, 3)
+    },
+
+    filterRecommendNewAlbumData() {
+      const { newAlbumData } = this
+      if (!newAlbumData.length) return
+      let newAlbumArr = newAlbumData.reduce((accumulator, currentValue) => {
+        accumulator.push({
+          id: currentValue.albumId,
+          picUrl: currentValue.coverUrl,
+          songName: currentValue.albumName,
+          artists: currentValue.artistName,
+          describe: this.songDescribe[Math.floor(Math.random() * 7)],
+          isShowMask: true
+        })
+        return accumulator
+      }, [])
+      return _chunk(newAlbumArr, 3)
+    },
+    filterTopListData() {
+      //排行榜数据
+      const { topListData } = this
+      if (!topListData.length) return
+      let toplistInfoArr = topListData.reduce((accumulator, currentValue) => {
+        //保存当前榜单内的歌曲信息
+        let saveSongInfoArr = []
+        //收集每首歌的信息
+        let collectTopListSongInfo = {}
+        //currentValue: 当前榜单
+        //tracks数组: 当前榜单内所有的歌曲
+        currentValue.tracks.slice(0, 3).forEach(topListSongInfo => {
+          collectTopListSongInfo.name = topListSongInfo.al.name
+          collectTopListSongInfo.id = topListSongInfo.id
+          collectTopListSongInfo.singerName = ''
+          collectTopListSongInfo.pic = topListSongInfo.al.picUrl
+          // ar数组: 存放的是歌手名
+          topListSongInfo.ar.forEach(singer => {
+            collectTopListSongInfo.singerName += singer.name + '/'
+          })
+          //去除歌手名最后一个斜杠
+          collectTopListSongInfo.singerName = collectTopListSongInfo.singerName.substring(0, collectTopListSongInfo.singerName.length - 1)
+          //保存当前歌曲的信息
+          saveSongInfoArr.push(collectTopListSongInfo)
+          collectTopListSongInfo = {}
+        })
+        accumulator.push([
+          {
+            topListName: currentValue.name,
+            topListId: currentValue.id,
+            saveSongInfoArr
+          }
+        ])
+        return accumulator
+      }, [])
+
+      this.$nextTick(() => {
+        this._initRanking()
+        setSingerMaxWidth(0, '.original-music-info')
+      })
+      return toplistInfoArr
+    }
+  },
   methods: {
     async newMusicTabChange(event) {
-      let idx = event ? event.target.dataset.index : 0;
-      const newMusicTitleChildren = this.$refs.newMusicTitle.children;
-      const newMusicContentChildren = this.$refs.newMusicContent.children;
+      let idx = event ? event.target.dataset.index : 0
+      const newMusicTitleChildren = this.$refs.newMusicTitle.children
+      const newMusicContentChildren = this.$refs.newMusicContent.children
       newMusicContentChildren.forEach((item, index) => {
-        newMusicTitleChildren[index].classList.remove("on");
-        item.style = "display:none ";
-        newMusicTitleChildren[idx].classList.add("on");
-        newMusicContentChildren[idx].style = "display:block";
-      });
+        newMusicTitleChildren[index].classList.remove('on')
+        item.style = 'display:none '
+        newMusicTitleChildren[idx].classList.add('on')
+        newMusicContentChildren[idx].style = 'display:block'
+      })
       if (idx == 1 && !this.newCdData.length) {
         // 新碟
-        const newCdData = await reqNewCd();
-        this.newCdData = newCdData.albums;
+        const newCdData = await reqNewCd()
+        this.newCdData = newCdData.albums
       }
       if (idx == 2 && !this.newAlbumData.length) {
         // 新专辑
-        const newAlbumData = await reqNewAlbum();
-        this.newAlbumData = newAlbumData.products;
+        const newAlbumData = await reqNewAlbum()
+        this.newAlbumData = newAlbumData.products
       }
     },
     init() {
-      const fatherSwiper = new Swiper(".father", {
+      const fatherSwiper = new Swiper('.father', {
         resistanceRatio: 0 //取消回弹
-      });
+      })
 
-      this._initProductModule();
-      this.newMusicTabChange();
+      this._initProductModule()
+      this.newMusicTabChange()
     },
 
     // 初始化轮播
@@ -437,65 +404,59 @@ export default {
           disableOnInteraction: false
         },
         pagination: {
-          el: ".swiper-pagination",
-          type: "custom",
+          el: '.swiper-pagination',
+          type: 'custom',
           renderCustom: (swiper, current, total) => {
             // total : 分页器总数
             // current: 当前激活的分页器下标 从 1 开始
-            this.bannerSwiperPaginationCount = total;
-            this.bannerSwiperPaginationIndex = current - 1;
+            this.bannerSwiperPaginationCount = total
+            this.bannerSwiperPaginationIndex = current - 1
           }
         }
-      });
+      })
       this.$nextTick(() => {
         //Vue异步更新界面 如果不在这个回调函数中调用，到时候无法获取到DOM元素
-        this.setSwiperPaginationContainerWidth();
-      });
+        this.setSwiperPaginationContainerWidth()
+      })
     },
     // 设置分页器容器宽度
     setSwiperPaginationContainerWidth() {
       // 获取分页器容器中的子元素
-      const swiperPaginationChildrens = Array.from(
-        this.$refs.swiperPaginationContainer.children
-      );
+      const swiperPaginationChildrens = Array.from(this.$refs.swiperPaginationContainer.children)
       // 获取分页器容器中第一个子元素
-      const swiperPaginationChild = swiperPaginationChildrens[0];
-      const getMargin =
-        getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1;
-      const getWidth = swiperPaginationChild.clientWidth;
-      const swiperPaginationChildrensSize =
-        (getMargin + getWidth) * swiperPaginationChildrens.length -
-        getMargin +
-        "px";
+      const swiperPaginationChild = swiperPaginationChildrens[0]
+      const getMargin = getComputedStyle(swiperPaginationChild).marginRight.slice(0, -2) * 1
+      const getWidth = swiperPaginationChild.clientWidth
+      const swiperPaginationChildrensSize = (getMargin + getWidth) * swiperPaginationChildrens.length - getMargin + 'px'
       // 设置分页器容器的宽度
-      this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize;
+      this.$refs.swiperPaginationContainer.style.width = swiperPaginationChildrensSize
     },
     // 初始化产品模块
     _initProductModule() {
-      this.productModuleSwiper = new Swiper(".product-module", {
+      this.productModuleSwiper = new Swiper('.product-module', {
         resistanceRatio: 0.6,
-        slidesPerView: "auto",
+        slidesPerView: 'auto',
         spaceBetween: 25,
         freeMode: true,
         nested: true,
         freeModeMomentumBounce: false,
         freeModeMinimumVelocity: 0.2
-      });
+      })
     },
 
     // 初始化排行榜
     _initRanking() {
-      this.rankingSwiper = new Swiper(this.$refs.rankingTypeContainer, {
+      this.rankingSwiper = new Swiper(this.$refs.topList, {
         nested: true,
         spaceBetween: 11,
-        slidesPerView: "auto",
+        slidesPerView: 'auto',
         observer: true,
         resistanceRatio: 0.6,
         slidesOffsetAfter: 20
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="less" scope>
@@ -800,7 +761,7 @@ export default {
                 height: 100%;
                 float: right;
                 &.new {
-                  background: url("./img/ddd.png") no-repeat center center;
+                  background: url('./img/ddd.png') no-repeat center center;
                   background-size: 26px 7px;
                   // background-color: #fe3a3b;
                 }
