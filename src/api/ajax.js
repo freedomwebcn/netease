@@ -2,14 +2,12 @@ import axios from 'axios'
 
 
 const instance = axios.create({
-    baseURL: 'http://82.156.218.182:3000/',
+    // baseURL: 'http://82.156.218.185:3000/',
     //  timeout: 8000,
 });
 
 instance.interceptors.request.use(function (config) {
-
     config.withCredentials = true
-
     return config;
 }, function (error) {
     return Promise.reject(error);

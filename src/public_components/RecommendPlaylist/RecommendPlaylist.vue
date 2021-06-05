@@ -1,4 +1,3 @@
-
 <template>
   <div class="recommend-playlist-container">
     <div class="recommend-playlist">
@@ -13,8 +12,9 @@
     </div>
     <div class="playlist" ref="playlistSwiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(item,index) in playlistData" :key="index">
-          <div class="playlist-info" :data-id="item.id">
+        <div class="swiper-slide" :data-id="item.id" v-for="(item,index) in playlistData" :key="index"
+          @click="querryPlaylistInfo(item.id)">
+          <div class="playlist-info">
             <i class="iconfont icon-play">{{item.playCount | formatPlayCount}}</i>
             <img :src="`${item.picUrl || item.coverImgUrl}?param=200y200`" alt />
             <p>{{item.name}}</p>
@@ -22,15 +22,16 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 
 <script>
-import "swiper/css/swiper.min.css";
-import Swiper from "swiper/js/swiper.js";
-import "@/tools/formatPlayCount.js";
-import More from "@/public_components/More";
+import 'swiper/css/swiper.min.css'
+import Swiper from 'swiper/js/swiper.js'
+import '@/tools/formatPlayCount.js'
+import More from '@/public_components/More'
 
 export default {
   props: {
@@ -41,13 +42,13 @@ export default {
     More
   },
   data() {
-    return {};
+    return {}
   },
   watch: {
     playlistData() {
       this.$nextTick(() => {
-        this._iniPlaylistSwiper();
-      });
+        this._iniPlaylistSwiper()
+      })
     }
   },
   mounted() {},
@@ -55,15 +56,19 @@ export default {
     _iniPlaylistSwiper() {
       const mySwiper = new Swiper(this.$refs.playlistSwiper, {
         spaceBetween: 10,
-        slidesPerView: "auto",
+        slidesPerView: 'auto',
         resistanceRatio: 0.6,
         freeMode: true,
         freeModeMomentumBounce: false,
         freeModeMinimumVelocity: 0.2
-      });
+      })
+    },
+    // 根据歌单ID 查询歌单内的所有歌曲
+    querryPlaylistInfo(id) {
+      this.$router.push({ path: `/playlist/${id}` })
     }
   }
-};
+}
 </script> 
 
 <style lang="less" scoped>
@@ -77,7 +82,7 @@ export default {
     .title-text {
       display: flex;
       position: relative;
-      padding: 15px 15px 10px 15px;
+      padding: 15px 15px 8px 15px;
       .l-title {
         flex: 1;
         font-size: 17px;
@@ -92,19 +97,20 @@ export default {
     overflow: hidden;
 
     .swiper-wrapper {
-      margin-top: 5px;
+      // margin-top: 5px;
       .swiper-slide {
         border-radius: 10px;
         width: 100px;
         // height: 100px;
         &::before {
-          content: "";
+          content: '';
           display: block;
           width: 92px;
           height: 10px;
           background-color: #f2f2f2;
+          // background-color: red;
           position: absolute;
-          top: -4px;
+          top: 1px;
           left: 4px;
           z-index: -9999;
           border-top-left-radius: 30px;
@@ -118,7 +124,7 @@ export default {
             position: absolute;
             color: #ffffff;
             right: 5px;
-            top: 4px;
+            top: 8px;
             background-color: rgba(0, 0, 0, 0.3);
             padding-top: 2px;
             padding-bottom: 2px;
@@ -131,6 +137,8 @@ export default {
           img {
             width: 100%;
             height: 100px;
+            margin-top: 5px;
+
             border-radius: 10px;
           }
           p {

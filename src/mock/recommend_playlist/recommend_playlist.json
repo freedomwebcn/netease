@@ -1,0 +1,84 @@
+{
+    "hasTaste": false,
+    "code": 200,
+    "category": 0,
+    "result": [{
+            "id": 6789015890,
+            "type": 0,
+            "name": "节奏控｜球场运球过人御用BGM",
+            "copywriter": "编辑推荐：过你就像清晨过马路！",
+            "picUrl": "https://p1.music.126.net/RzsplpeltVO5r34_Eb23oQ==/109951166054741526.jpg",
+            "canDislike": false,
+            "trackNumberUpdateTime": 1622738815634,
+            "playCount": 40285,
+            "trackCount": 34,
+            "highQuality": false,
+            "alg": "featured"
+        },
+        {
+            "id": 6789524524,
+            "type": 0,
+            "name": "打起精神：愿你破晓而生，踏浪前行",
+            "copywriter": "编辑推荐：低头是题海，抬头是未来。",
+            "picUrl": "https://p1.music.126.net/gt_tiI7f2ccyTd0BeUcwFw==/109951166055566701.jpg",
+            "canDislike": false,
+            "trackNumberUpdateTime": 1622784072622,
+            "playCount": 35408,
+            "trackCount": 52,
+            "highQuality": false,
+            "alg": "featured"
+        },
+        {
+            "id": 6784451924,
+            "type": 0,
+            "name": "『治愈基地』爱自己是终生浪漫的开始",
+            "copywriter": "热门推荐",
+            "picUrl": "https://p1.music.126.net/ZBOSXAG-KA0A5T5qxEXRTQ==/109951166047125101.jpg",
+            "canDislike": true,
+            "trackNumberUpdateTime": 1622822644888,
+            "playCount": 939383,
+            "trackCount": 41,
+            "highQuality": false,
+            "alg": "cityLevel_A"
+        },
+        {
+            "id": 3129489338,
+            "type": 0,
+            "name": "网易云音乐最热个性推荐总结",
+            "copywriter": "热门推荐",
+            "picUrl": "https://p1.music.126.net/8gx1rLiemXwoKE6fKyq8PA==/109951165291292392.jpg",
+            "canDislike": true,
+            "trackNumberUpdateTime": 1599105764303,
+            "playCount": 924103,
+            "trackCount": 242,
+            "highQuality": false,
+            "alg": "cityLevel_A"
+        },
+        {
+            "id": 5068534740,
+            "type": 0,
+            "name": "还好大雾四起 藏匿难言爱意",
+            "copywriter": "热门推荐",
+            "picUrl": "https://p1.music.126.net/UDv_LqXIRs91911xBuVhhg==/109951165612512203.jpg",
+            "canDislike": true,
+            "trackNumberUpdateTime": 1622789214862,
+            "playCount": 4347225,
+            "trackCount": 169,
+            "highQuality": false,
+            "alg": "cityLevel_A"
+        },
+        {
+            "id": 922768027,
+            "type": 0,
+            "name": "[超短翻唱]好听的歌不需要完整版",
+            "copywriter": "热门推荐",
+            "picUrl": "https://p1.music.126.net/7xRk44hOpw3A4A54kBf9bw==/109951165208771671.jpg",
+            "canDislike": true,
+            "trackNumberUpdateTime": 1622757992221,
+            "playCount": 2214079,
+            "trackCount": 99,
+            "highQuality": false,
+            "alg": "cityLevel_A"
+        }
+    ]
+}

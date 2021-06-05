@@ -1,20 +1,20 @@
-import Home from "@/page/Home/Home"
-import User from "@/page/User/User"
-import Community from "@/page/Community/Community"
+import palylist from "@/page/PlaylistInfo/palylist"
+import home from "@/page/Home/Home"
 
 
 export default [
-//    {
-//        path: '/home',
-//        component: Home
-//     },
-//      {
-//          path: '/user',
-//          component: User
-//     },
-//      {
-//          path: '/community',
-//          component: Community
-//      }
+     {
+         path: '/',
+         redirect:"/home"
+     },
+     {
+         path: '/home',
+         component: home
+     },
+    
+    {
+        path: '/playlist/:id',
+        component: palylist
+    },
 
 ]

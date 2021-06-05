@@ -2,11 +2,10 @@
 包含n个接口请求函数的模块
 */
 import ajax from './ajax'
-
 // 1、获取banner
 export const reqBanner = ({
     type
-}) => ajax('/banner', {
+}) => ajax('banner', {
     params: {
         type
     }
@@ -14,7 +13,7 @@ export const reqBanner = ({
 // 2、获取推荐歌单
 export const reqRecommendPlaylist = ({
     limit
-}) => ajax('/personalized', {
+}) => ajax('personalized', {
     params: {
         limit
     }
@@ -35,9 +34,9 @@ export const reqNewAlbum = () => ajax('album/list?limit=6')
 export const reqTopList = async () => {
     const ids = []
     let topListDetailData = null
-    const toplistData = await ajax('toplist/detail')
+    const {toplist_detail } = await ajax('toplist/detail')
     //取前三条数据
-    toplistData.list.slice(0, 3).forEach((item) => {
+    toplist_detail.list.slice(0, 3).forEach((item) => {
         topListDetailData = reqTopListDetail(item.id)
         ids.push(topListDetailData)
     });
@@ -46,3 +45,8 @@ export const reqTopList = async () => {
 
 // 6、根据排行榜 ID 获取排行榜详情
 export const reqTopListDetail = (id) => ajax(`playlist/detail?id=${id}`)
+
+
+
+
+

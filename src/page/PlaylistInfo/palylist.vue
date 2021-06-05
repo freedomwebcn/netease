@@ -1,5 +1,5 @@
 <template>
     <div>
-         community
+        hello world 
     </div>
 </template>
