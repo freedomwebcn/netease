@@ -18,7 +18,7 @@
         <div class="side">1</div>
       </van-popup>
       <!-- 发现 -->
-      <div class="swiper-slide slide1 scw">
+      <div class="swiper-slide slide1 scw" id="scrollTop" ref="homeScroll">
         <div class="clear-fixed"></div>
         <!-- 轮播 -->
         <div class="bgc">
@@ -81,7 +81,7 @@
           <div class="line border-bottom-1px"></div>
 
           <!-- 推荐歌单  -->
-          <RecommendPlaylist title="推荐歌单" :playlistData="recommendPlaylistData"></RecommendPlaylist>
+          <RecommendPlaylist title="推荐歌单" :playlistData="recommendPlaylistData" ref="scroll"></RecommendPlaylist>
         </div>
         <!-- 推荐的歌 -->
         <RecommendMusic :recommendMusicData="filterRecommendNewSongData"></RecommendMusic>
@@ -209,6 +209,8 @@ export default {
         { mark: '', describeText: '你好呀', isShow: true },
         { mark: '', describeText: '', isShow: false }
       ],
+      bannerSwiper: null,
+      scrollTop: 0,
       // 页面切换后的索引
       slideIndex: 0,
       placeholder: '',
@@ -233,9 +235,22 @@ export default {
       // 新专辑
       newAlbumData: [],
       // 排行榜
-      topListData: [],
-      testarr: []
+      topListData: []
     }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    // 路由离开时 记录当前页面的 top 值
+    this.scrollTop = this.$refs.homeScroll.scrollTop
+    this.bannerSwiper && this.bannerSwiper.autoplay.stop()
+    next()
+  },
+
+  // keep-alive组件激活时触发: activated()
+  activated() {
+   // 移动到之前保存的top值
+    this.$refs.homeScroll.scrollTop = this.scrollTop
+    this.bannerSwiper && this.bannerSwiper.autoplay.start()
   },
 
   async mounted() {
@@ -257,11 +272,8 @@ export default {
     this.hotPlaylistData = hot_playlist.playlists
     // 排行榜
     const topListData = await reqTopList()
-    console.log(topListData)
-
     topListData.forEach(async topList => {
       let { toplis_detai } = await topList
-
       this.topListData.push(toplis_detai.playlist)
     })
   },

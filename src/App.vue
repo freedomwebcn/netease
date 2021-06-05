@@ -1,27 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <button>1111111111111</button>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {}
   },
   mounted() {},
-  methods: {
-    // querryPlaylistInfo(id) {
-    //   this.$router.push({ path: `/playlist` })
-    // },
-    // querryPlaylistInfo2(id) {
-    //   this.$router.push({ path: `/home` })
-    // }
-  },
+  methods: {},
   computed: {},
 
-  components: {}
+  components: {},
+ 
 }
 </script>
 <style lang="less" scope>

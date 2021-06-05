@@ -42,7 +42,9 @@ export default {
     More
   },
   data() {
-    return {}
+    return {
+      scrollTop: 0
+    }
   },
   watch: {
     playlistData() {
@@ -65,7 +67,7 @@ export default {
     },
     // 根据歌单ID 查询歌单内的所有歌曲
     querryPlaylistInfo(id) {
-      this.$router.push({ path: `/playlist/${id}` })
+      this.$router.push({ path: `/playlist`, query: { id } })
     }
   }
 }
