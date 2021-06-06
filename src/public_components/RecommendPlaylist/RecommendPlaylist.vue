@@ -76,10 +76,7 @@ export default {
 <style lang="less" scoped>
 .recommend-playlist-container {
   background: #ffffff;
-  border-top-right-radius: 13px;
-  border-top-left-radius: 13px;
-  border-bottom-right-radius: 13px;
-  border-bottom-left-radius: 13px;
+  border-radius: 0 0 13px 13px;
   .recommend-playlist {
     .title-text {
       display: flex;
@@ -94,29 +91,23 @@ export default {
   }
   .playlist {
     height: 145px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 15px;
     overflow: hidden;
-
     .swiper-wrapper {
-      // margin-top: 5px;
       .swiper-slide {
         border-radius: 10px;
         width: 100px;
-        // height: 100px;
         &::before {
           content: '';
           display: block;
           width: 92px;
           height: 10px;
           background-color: #f2f2f2;
-          // background-color: red;
           position: absolute;
           top: 1px;
           left: 4px;
           z-index: -9999;
-          border-top-left-radius: 30px;
-          border-top-right-radius: 30px;
+          border-radius: 30px 30px 0 0;
         }
         .playlist-info {
           width: 100%;
@@ -128,11 +119,8 @@ export default {
             right: 5px;
             top: 8px;
             background-color: rgba(0, 0, 0, 0.3);
-            padding-top: 2px;
-            padding-bottom: 2px;
+            padding: 2px 3px;
             font-size: 12px;
-            padding-left: 3px;
-            padding-right: 3px;
             border-radius: 15px;
           }
 
@@ -140,7 +128,6 @@ export default {
             width: 100%;
             height: 100px;
             margin-top: 5px;
-
             border-radius: 10px;
           }
           p {

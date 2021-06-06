@@ -1,5 +1,5 @@
-import playlist from "@/page/PlaylistInfo/playlist"
-import home from "@/page/Home/Home"
+import PlaylistInfo from "@/page/PlaylistInfo/PlaylistInfo"
+import Home from "@/page/Home/Home"
 
 
 export default [{
@@ -9,7 +9,7 @@ export default [{
 
     {
         path: '/home',
-        component: home,
+        component: Home,
         meta: {
             keepAlive: true
         }
@@ -17,7 +17,7 @@ export default [{
 
     {
         path: '/playlist',
-        component: playlist,
+        component: PlaylistInfo,
         meta: {
             keepAlive: false
         }

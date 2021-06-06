@@ -235,7 +235,8 @@ export default {
       // 新专辑
       newAlbumData: [],
       // 排行榜
-      topListData: []
+      topListData: [],
+      bannerActiveIndex: 0
     }
   },
 
@@ -243,13 +244,15 @@ export default {
     // 路由离开时 记录当前页面的 top 值
     this.scrollTop = this.$refs.homeScroll.scrollTop
     this.bannerSwiper && this.bannerSwiper.autoplay.stop()
+    // this.bannerActiveIndex = this.bannerSwiper && this.bannerSwiper.activeIndex
     next()
   },
 
   // keep-alive组件激活时触发: activated()
   activated() {
-   // 移动到之前保存的top值
+    // 移动到之前保存的top值
     this.$refs.homeScroll.scrollTop = this.scrollTop
+    // this.bannerSwiper && this.bannerSwiper.slideTo(this.bannerActiveIndex) //切换到指定的slide
     this.bannerSwiper && this.bannerSwiper.autoplay.start()
   },
 
@@ -279,6 +282,9 @@ export default {
   },
   watch: {},
   computed: {
+    banerSwiper() {
+      return this.bannerSwiper && this.bannerSwiper
+    },
     // 过滤新歌数据
     filterRecommendNewSongData() {
       // debugger;
