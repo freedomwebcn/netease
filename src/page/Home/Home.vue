@@ -18,7 +18,7 @@
         <div class="side">1</div>
       </van-popup>
       <!-- 发现 -->
-      <div class="swiper-slide slide1 scw" id="scrollTop" ref="homeScroll">
+      <div class="swiper-slide slide1 scw"  ref="homeScroll">
         <div class="clear-fixed"></div>
         <!-- 轮播 -->
         <div class="bgc">

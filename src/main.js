@@ -6,13 +6,16 @@ import store from './store'
 import 'lib-flexible'
 import "@/mock/mockServer"
 import {
-  Style
+  Style,
 } from 'cube-ui'
 import {
-  Popup
+  Popup,
 } from 'vant';
 
 Vue.use(Popup);
+
+
+
 
 
 Vue.prototype.$http = Axios
