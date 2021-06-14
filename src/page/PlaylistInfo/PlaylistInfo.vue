@@ -55,7 +55,6 @@
         <li ref="test2">8</li>
         <li>2</li>
         <li>2</li>
-        <!-- <div class="ssss" ref="ssss"></div> -->
 
       </ul>
     </div>
@@ -90,35 +89,24 @@ export default {
       bounce: false
     })
 
-    if (-this.bs.maxScrollY <= mixScroll) {
+    // 如果内容高度不满足滚动条件，或者小于最小滚动距离mixScroll，手动设置内容高度
+    if (-this.bs.maxScrollY < mixScroll) {
       // 获取滚动容器的高度
-      // let viewport_H = this.$refs.bscroll.clientHeight
-      // let content_H = this.$refs.content.clientHeight
-      // let result1 = viewport_H - content_H
-      // let result2 = result1 + mixScroll
-      // let result3 = content_H + result2
-
       let bsScroll_container_H = this.$refs.bscrollContainer.clientHeight
-
+      // 设置内容高度
       this.$refs.content.style.height = bsScroll_container_H + mixScroll + 'px'
       this.bs.refresh()
     }
     console.log(this.bs.maxScrollY, 'max')
     this.bs.on('scroll', position => {
-      // -1 表示手指从上往下滑，1 表示从下往上滑
       console.log(position.y)
+      // 从下往上滑
       if (this.bs.movingDirectionY == 1 && -position.y >= parseInt(mixScroll)) {
-        this.fixedTab()
+        this.fixedTab(true)
       }
-
-      //  从上往下滑
-      if (this.bs.movingDirectionY == -1 && -position.y <= mixScroll) {
-        this.$refs.bs.style.display = 'block'
-        this.$refs.test.style.display = 'none'
-        this.$refs.mask.style.display = 'none'
-        this.$refs.header.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'
-        this.$refs.header.style.opacity = '0.2'
-        this.bs.refresh()
+      // 从上往下滑
+      if (this.bs.movingDirectionY == -1 && -position.y < mixScroll) {
+        this.fixedTab(false)
       }
     })
 
@@ -129,32 +117,44 @@ export default {
         this.bs.scrollTo(0, 0, 300)
       } else if (-this.bs.maxScrollY >= Math.round(mixScroll) && -this.bs.y <= mixScroll) {
         console.log('滚动结束')
-        this.bs.scrollTo(0, -parseInt(mixScroll), 200)
-        this.fixedTab()
+        this.bs.scrollTo(0, -Math.round(mixScroll), 200)
+        this.fixedTab(true)
       }
     })
   },
 
   methods: {
-    // 固定tab栏
-    fixedTab() {
-      this.$refs.header.style.background = 'red'
-      this.$refs.header.style.opacity = '2'
-
-      /* 
-        真实tab隐藏 
-        在bs内容区中的tab元素，设置固定定位是没效果的 
-        所以要用一个虚拟的tab栏，在满足条件时显示虚拟tab栏（固定定位），真实tab隐藏。
-     */
-      this.$refs.bs.style.display = 'none'
-      //   显示虚拟tab
-      this.$refs.mask.style.display = 'block'
-      /* 
-        真实tab隐藏后不占用文档流的位置
-        它的下一个兄弟元素会顶上来，这里用一个没有内容的空元素，宽高和tab栏一样，占住位置。
+    /*
+      是否固定tab栏
+      isFixedTab 为true 固定，false不固定
     */
-      this.$refs.test.style.display = 'block'
-      this.bs.refresh()
+    fixedTab(isFixedTab) {
+      if (isFixedTab) {
+        this.$refs.header.style.background = 'red'
+        this.$refs.header.style.opacity = '2'
+        /* 
+          真实tab隐藏 
+          在bs内容区中的tab元素，设置固定定位是没效果的 
+          所以要用一个虚拟的tab栏，在满足条件时显示虚拟tab栏（固定定位），真实tab隐藏。
+        */
+
+        this.$refs.bs.style.display = 'none'
+        //   显示虚拟tab
+        this.$refs.mask.style.display = 'block'
+        /* 
+          真实tab隐藏后不占用文档流的位置
+          它的下一个兄弟元素会顶上来，这里用一个没有内容的空元素，宽高和tab栏一样，占住位置。
+        */
+        this.$refs.test.style.display = 'block'
+        this.bs.refresh()
+      } else {
+        this.$refs.bs.style.display = 'block'
+        this.$refs.test.style.display = 'none'
+        this.$refs.mask.style.display = 'none'
+        this.$refs.header.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'
+        this.$refs.header.style.opacity = '0.2'
+        this.bs.refresh()
+      }
     },
     getElHeight(el) {
       let el_mb = getComputedStyle(el).marginBottom.slice(0, -2) * 1
@@ -174,8 +174,8 @@ export default {
     height: 60px;
     position: absolute;
     z-index: 999;
-    background-color: rgba(0, 0, 0, 0.1);
-    opacity: 0.2;
+    // background-color: rgba(0, 0, 0, 0.1);
+    // opacity: 0.2;
   }
 
   .bgc {
@@ -256,10 +256,7 @@ export default {
         // background-color: #fff;
         // background-color: rgb(2, 253, 136);
       }
-      .ssss {
-        height: 661px;
-        display: none;
-      }
+
       .header_content {
         height: 100px;
         padding: 0 10px;
@@ -279,12 +276,12 @@ export default {
           color: #ffff;
 
           .playlist_name {
-            flex: 1 100%;
+            align-self: flex-start;
             font-size: 14px;
           }
           .about_author {
             display: flex;
-            flex: 1 100%;
+            flex: 100%;
             align-items: center;
             margin-left: -6px;
             color: rgba(203, 209, 212);
@@ -341,9 +338,3 @@ export default {
   }
 }
 </style>
-
-
-
-
-
-
